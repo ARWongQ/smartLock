@@ -20,6 +20,7 @@ class FriendInfoViewController: UIViewController {
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: UI/UX
+    // test 
     @IBOutlet weak var fullNameTextField: HoshiTextField!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var opensDoorSwitch: UISwitch!
