@@ -115,7 +115,7 @@
 		133B56C021ADE89500DCF0F9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1355265D220122A900B49139 /* Friend.swift */,
+				132DF75F2206570E00AA10CC /* Device.swift */,
 				133B56C421ADF89700DCF0F9 /* User.swift */,
 			);
 			path = Model;
@@ -144,9 +144,9 @@
 				133C73E221B7330800B65C95 /* UserMainViewController.swift */,
 				133B56AE21ADE87F00DCF0F9 /* AppDelegate.swift */,
 				133B56B021ADE87F00DCF0F9 /* MainViewController.swift */,
+				1355265D220122A900B49139 /* Friend.swift */,
 				13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */,
 				1323647721F6935D0027E2C7 /* UserAccountTableViewController.swift */,
-				132DF75F2206570E00AA10CC /* Device.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -256,12 +256,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,13 +463,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UGJ7NBDTMF;
+				DEVELOPMENT_TEAM = DS9Q4NU47H;
 				INFOPLIST_FILE = smartLock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockTwo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -480,13 +482,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UGJ7NBDTMF;
+				DEVELOPMENT_TEAM = DS9Q4NU47H;
 				INFOPLIST_FILE = smartLock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockTwo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

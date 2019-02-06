@@ -7,5 +7,6 @@ target 'smartLock' do
 
   # Pods for smartLock
   pod 'TextFieldEffects'
+  pod 'Alamofire'
 
 end
