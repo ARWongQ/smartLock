@@ -20,7 +20,7 @@ class User{
     var friends: [Friend]
     var devices: [Device]
     
-    init( _id: Int, _firstName: String, _lastName: String, _email: String, _password: String,  _devices: [Device] ){
+    init( _ _id: Int, _ _firstName: String, _ _lastName: String, _ _email: String, _ _password: String ){
         // Set all properties
         id = _id
         firstName = _firstName
@@ -30,13 +30,14 @@ class User{
         password = _password
         
         // Temporary
-        friends = [
-            Friend(_id: 1, _fullName: "Augusto Wong", _image: UIImage(named: "RolandoProfile.jpg")!, _comeInDays: [ true, true, false, true, true, false, true ], _openDoorNotification: true ),
-            Friend(_id: 2, _fullName: "Mario Zyla", _image: UIImage(named: "testImage.png")!, _comeInDays: [ true, true, true, true, true, true, true ], _openDoorNotification: true ),
-            Friend(_id: 3, _fullName: "Aleksander Ibro", _image: UIImage(named: "tempHomeImage")!, _comeInDays: [ false, true, true, false, true, true, true ], _openDoorNotification: true )
-        ]
+//        friends = [
+//            Friend(_id: 1, _fullName: "Augusto Wong", _image: UIImage(named: "RolandoProfile.jpg")!, _comeInDays: [ true, true, false, true, true, false, true ], _openDoorNotification: true ),
+//            Friend(_id: 2, _fullName: "Mario Zyla", _image: UIImage(named: "testImage.png")!, _comeInDays: [ true, true, true, true, true, true, true ], _openDoorNotification: true ),
+//            Friend(_id: 3, _fullName: "Aleksander Ibro", _image: UIImage(named: "tempHomeImage")!, _comeInDays: [ false, true, true, false, true, true, true ], _openDoorNotification: true )
+//        ]
         
-        devices = _devices
+        friends = []
+        devices = []
         
     }
     
@@ -59,6 +60,10 @@ class User{
     
     func updateProfileImg(_profileImg: UIImage ){
         profileImg = _profileImg
+    }
+    
+    func addFriend( _ friend: Friend ){
+        friends.append( friend )
     }
     
 }

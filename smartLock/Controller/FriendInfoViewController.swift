@@ -160,7 +160,7 @@ class FriendInfoViewController: UIViewController {
                 let id = friend?.id,
                 let myImage = profileImageButton.currentBackgroundImage
                 else { return }
-            let editedFriend = Friend(_id: id, _fullName: fullName, _image: myImage, _comeInDays: comeInDays, _openDoorNotification: openDoorNotification )
+            let editedFriend = Friend( id, fullName, myImage, comeInDays, openDoorNotification )
             delegate?.updateFriend(with: editedFriend )
             
             self.navigationController?.popToRootViewController( animated: true )
@@ -170,7 +170,7 @@ class FriendInfoViewController: UIViewController {
             // testing purposes
             let id = 4
             let myImage = profileImageButton.currentBackgroundImage!
-            let newFriend = Friend(_id: id, _fullName: fullName, _image: myImage, _comeInDays: comeInDays, _openDoorNotification: openDoorNotification )
+            let newFriend = Friend( id, fullName, myImage, comeInDays, openDoorNotification )
             delegate?.addNewFriend(with: newFriend )
             self.dismiss( animated: true, completion: nil )
         }

@@ -47,12 +47,34 @@ class UserMainViewController: UIViewController {
     
     @IBAction func readFromCloud(_ sender: Any) {
         
-//        guard let data = "SELECT * from App_User;"
-        let parameters: Parameters = ["query": "SELECT * from App_User"]     //This will be your parameter
-        let url = "http://40.114.87.162:5000/sqlQuery"
+        let parameters: Parameters = ["infoRequested": "allUsersInfo"]     //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
+        let ipAddress = "23.96.59.16"
+        let url = "http://\(ipAddress):5000/sqlQuery"
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             print(response)
         }
+        
+        // storing a user in the db, by sending request to Flask server
+        let parameters2: Parameters = [
+            "addUsers" : [
+                "5" : [
+                    "first" : "Aleksander",
+                    "last" : "Ibro",
+                    "email" : "aibro@wpi.edu"
+                ],
+                "4" : [
+                    "first" : "Kristiano",
+                    "last" : "Bejko",
+                    "email" : "kbejko@wpi.edu"
+                ]
+            ]
+        ]
+//        let parameters2 : Parameters = [
+//            "users" : "Aleksander should be here"
+//        ]
+//        let url2 = "http://52.168.123.64:5000/user"
+        
+        Alamofire.request(url, method: .post, parameters: parameters2, encoding: JSONEncoding.default)
         
     }
     

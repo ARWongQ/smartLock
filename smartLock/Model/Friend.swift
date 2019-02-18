@@ -17,7 +17,7 @@ class Friend{
     var openDoorNotification: Bool
     
     
-    init( _id: Int, _fullName: String, _image: UIImage, _comeInDays: [Bool], _openDoorNotification: Bool ){
+    init( _ _id: Int, _ _fullName: String, _ _image: UIImage, _ _comeInDays: [Bool], _ _openDoorNotification: Bool ){
         // Set all properties
         id = _id
         fullName = _fullName

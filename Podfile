@@ -6,6 +6,7 @@ target 'smartLock' do
   use_frameworks!
 
   # Pods for smartLock
+  pod 'SwiftyJSON'
   pod 'TextFieldEffects'
   pod 'Alamofire'
 

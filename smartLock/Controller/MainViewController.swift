@@ -8,6 +8,8 @@
 
 import UIKit
 import TextFieldEffects
+import Alamofire
+import SwiftyJSON
 
 class MainViewController: UIViewController {
 
@@ -23,8 +25,8 @@ class MainViewController: UIViewController {
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: - Useful Variables
-    var userDevice = Device(_id: 1, _deviceName: "My First Device", _doorWasOpenedNotif: true, _someoneIsOutsideNotif: true, _leftOpenTime: 5 )
-    var userAugusto : User?
+    //var userDevice = Device(_id: 1, _deviceName: "My First Device", _doorWasOpenedNotif: true, _someoneIsOutsideNotif: true, _leftOpenTime: 5 )
+    var user : User?
     
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -34,8 +36,6 @@ class MainViewController: UIViewController {
         
         // Set the view as needed
         setUI()
-    
-       
     }
     
     
@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
         SignUpButton.layer.borderColor = UIColor.lightGray.cgColor
         
         // creating my user
-        userAugusto = User( _id: 1, _firstName: "Augusto", _lastName: "Wong", _email: "arwong@wpi.edu", _password: "123456", _devices: [ userDevice ] )
+        //userAugusto = User( _id: 1, _firstName: "Augusto", _lastName: "Wong", _email: "arwong@wpi.edu", _password: "123456" )
         
         // Setting Title Font
         self.navigationController?.navigationBar.titleTextAttributes =
@@ -59,12 +59,12 @@ class MainViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
+        self.getUserAuthenticationFromDB( email, password )
+
         
-        let valid = validateUser(email: email, password: password )
-        if( valid ){
-            performSegue(withIdentifier: "mainToUserMain", sender: self )
-        }
     }
+    
+    
     
     // go to Sign Up view
     @IBAction func signUpButtonPressed(_ sender: Any) {
@@ -74,6 +74,7 @@ class MainViewController: UIViewController {
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: - View Transitions
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let identifier = segue.identifier
         
@@ -83,8 +84,8 @@ class MainViewController: UIViewController {
         case "mainToUserMain":
             print( "Moving to User Main Controller" )
             let destinationVC = segue.destination as! UserTabBarController
-            destinationVC.userAugusto = userAugusto
-            destinationVC.currentUser = userAugusto
+            //destinationVC.userAugusto = userAugusto
+            destinationVC.currentUser = user
             
         default:
             print("NO VIEW identifier found")
@@ -102,6 +103,82 @@ class MainViewController: UIViewController {
         
     }
     
+    ////////////////////////////////////////////////////////////
+    // MARK: CLOUD/DB
+    // Gets the user from the database
+    func getUserAuthenticationFromDB( _ email: String, _ password: String ){
+        let myEmail = "arwong@wpi.edu"
+        let myPassword = "123456"
+        //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
+        let parameters: Parameters = ["infoRequested": "getUserAuthentication", "email": myEmail, "password": myPassword ]
+        let ipAddress = "23.96.59.16"
+        let url = "http://\(ipAddress):5000/sqlQuery"
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            print("MY RESPONSE")
+            //print( response )
+            if response.result.isSuccess {
+                
+                // create the user with the DB info
+                let answerJSON : JSON = JSON( response.result.value! )
+                self.user = self.createUser(user: answerJSON)
+                
+                // Go the next screen
+                self.performSegue(withIdentifier: "mainToUserMain", sender: self )
+                
+                
+            }else{
+                // SHOW ERROR MESSAGE
+            }
+        }
+        
+    }
+    
+    //Creates a user from a json
+    func createUser( user: JSON  ) -> User {
+        // Create the user
+        let id = user["id"].intValue
+        let firstN = user["firstName"].stringValue
+        let lastN = user["lastName"].stringValue
+        let email = user["email"].stringValue
+        let password = user["password"].stringValue
+        var myUser = User( id, firstN, lastN, email,  password )
+        
+        // add friends if any
+        let friendsDic = user["friends"]
+        for (key,value) in friendsDic {
+            // create a user
+            let id = value["id"].intValue
+            let firstN = value["firstName"].stringValue
+            let lastN = value["lastName"].stringValue
+            let fullName = "\(firstN) \(lastN)"
+            let image = UIImage(named: "img_placeholder")!
+            let comeInDaysStr = value["comeInDays"].stringValue
+            let openDoorNotifStr = value["doorNotification"].stringValue
+            
+            // get the proper format for comeInDays and openDoorNotif
+            var comeInDays : [Bool] = []
+            for char in comeInDaysStr{
+                if( char == "T" ){
+                    comeInDays.append( true )
+                }else if ( char == "F" ){
+                    comeInDays.append( false )
+                }
+            }
+            
+            var openDoorNotif = false
+            if( openDoorNotifStr == "T" ){
+                openDoorNotif = true
+            }
+            
+        
+            let curFriend = Friend( id, fullName, image, comeInDays, openDoorNotif )
+            myUser.addFriend( curFriend )
+        }
+        
+        return myUser
+
+    }
 
 
 }
