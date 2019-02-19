@@ -34,7 +34,7 @@ class FriendTableViewCell: UITableViewCell {
     // Updates the cell view
     func update( with friend: Friend ){
     
-        fullNameLabel.text = friend.fullName
+        fullNameLabel.text = "\(friend.firstName) \(friend.lastName)"
         
         imageF.image = friend.image
         imageF.layer.cornerRadius = 24.5

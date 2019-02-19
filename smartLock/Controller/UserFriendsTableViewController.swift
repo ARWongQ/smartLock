@@ -13,7 +13,7 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
     // MARK: Delegate Functions
     // Updates a friend from my list of friends
     func updateFriend( with friend: Friend ){
-        
+
         if let index = getFriendIndex(id: friend.id ){
             currentUser?.friends.remove(at: index )
             currentUser?.friends.insert( friend, at: friend.id - 1 )
@@ -61,6 +61,8 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes =
             [ NSAttributedString.Key.foregroundColor: UIColor.white ]
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +70,13 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         
         // Get the current user and update the UI
         let tabbar = tabBarController as! UserTabBarController
+        
+        // Get the admin and sort the friends
+        if let myUser = tabbar.currentUser{
+            myUser.friends = myUser.friends.sorted(by: < )
+        }
         currentUser = tabbar.currentUser
+        
         tableView.reloadData()
     }
     

@@ -59,7 +59,26 @@ class MainViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
-        self.getUserAuthenticationFromDB( email, password )
+        //self.getUserAuthenticationFromDB( email, password )
+        
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Only for testing
+        // for now we are just creating our own user
+        let tempUser = User(1, "Augusto", "Wong", "arwong@wpi.edu", "123456")
+        let friends = [
+            Friend( 1, "Mario", "Zyla",  UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
+            Friend( 2, "Aleksander",  "Ibro",  UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
+            Friend( 3, "Carlos",  "Galo",  UIImage(named: "testImage.png")!, [ true, true, true, true, true, true, true ], true )]
+        
+        for friend in friends{
+            tempUser.addFriend(friend)
+        }
+        
+        self.user = tempUser
+        
+        // Go the next screen
+        self.performSegue(withIdentifier: "mainToUserMain", sender: self )
 
         
     }
@@ -92,11 +111,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    // function to validate the user
-    func validateUser( email: String, password: String ) -> Bool {
-        //return (email == UserAugusto.email && password == UserAugusto.password)
-        return true 
-    }
     
     //unwind a view back to main screen
     @IBAction func unwindToMainVC( unwindSegue: UIStoryboardSegue ) {
@@ -129,6 +143,11 @@ class MainViewController: UIViewController {
                 
             }else{
                 // SHOW ERROR MESSAGE
+                
+                
+                
+                
+                
             }
         }
         
@@ -151,7 +170,7 @@ class MainViewController: UIViewController {
             let id = value["id"].intValue
             let firstN = value["firstName"].stringValue
             let lastN = value["lastName"].stringValue
-            let fullName = "\(firstN) \(lastN)"
+            //let fullName = "\(firstN) \(lastN)"
             let image = UIImage(named: "img_placeholder")!
             let comeInDaysStr = value["comeInDays"].stringValue
             let openDoorNotifStr = value["doorNotification"].stringValue
@@ -172,7 +191,7 @@ class MainViewController: UIViewController {
             }
             
         
-            let curFriend = Friend( id, fullName, image, comeInDays, openDoorNotif )
+            let curFriend = Friend( id, firstN, lastN, image, comeInDays, openDoorNotif )
             myUser.addFriend( curFriend )
         }
         

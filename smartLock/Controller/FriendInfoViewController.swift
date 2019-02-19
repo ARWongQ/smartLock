@@ -50,7 +50,7 @@ class FriendInfoViewController: UIViewController {
         
         if let friend = friend {
             navigationItem.title = "Friend"
-            fullNameTextField.text = friend.fullName
+            fullNameTextField.text = "\(friend.firstName) \(friend.lastName)"
             profileImageButton.setBackgroundImage( friend.image, for: .normal )
             opensDoorSwitch.isOn = friend.openDoorNotification
 
@@ -152,6 +152,9 @@ class FriendInfoViewController: UIViewController {
         guard let fullName = fullNameTextField.text else { return }
         let openDoorNotification = opensDoorSwitch.isOn
         let comeInDays = getComeInDays()
+        let fullNameSplit = fullName.components(separatedBy: " ")
+        let firstN = fullNameSplit[0]
+        let lastN = fullNameSplit.count > 1 ? fullNameSplit[1] : ""
         
         // updating edited friend
         if navigationItem.title == "Friend"{
@@ -160,7 +163,7 @@ class FriendInfoViewController: UIViewController {
                 let id = friend?.id,
                 let myImage = profileImageButton.currentBackgroundImage
                 else { return }
-            let editedFriend = Friend( id, fullName, myImage, comeInDays, openDoorNotification )
+            let editedFriend = Friend( id, firstN, lastN, myImage, comeInDays, openDoorNotification )
             delegate?.updateFriend(with: editedFriend )
             
             self.navigationController?.popToRootViewController( animated: true )
@@ -170,7 +173,7 @@ class FriendInfoViewController: UIViewController {
             // testing purposes
             let id = 4
             let myImage = profileImageButton.currentBackgroundImage!
-            let newFriend = Friend( id, fullName, myImage, comeInDays, openDoorNotification )
+            let newFriend = Friend( id, firstN, lastN, myImage, comeInDays, openDoorNotification )
             delegate?.addNewFriend(with: newFriend )
             self.dismiss( animated: true, completion: nil )
         }
