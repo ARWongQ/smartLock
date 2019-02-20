@@ -111,7 +111,7 @@ class MainViewController: UIViewController {
         let myPassword = "123456"
         //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
         let parameters: Parameters = ["infoRequested": "getUserAuthentication", "email": myEmail, "password": myPassword ]
-        let ipAddress = "23.96.59.16"
+        let ipAddress = "doorlockvm.eastus.cloudapp.azure.com"
         let url = "http://\(ipAddress):5000/sqlQuery"
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
@@ -154,7 +154,7 @@ class MainViewController: UIViewController {
             let fullName = "\(firstN) \(lastN)"
             let image = UIImage(named: "img_placeholder")!
             let comeInDaysStr = value["comeInDays"].stringValue
-            let openDoorNotifStr = value["doorNotification"].stringValue
+            let openDoorNotif = value["doorNotification"].intValue == 1
             
             // get the proper format for comeInDays and openDoorNotif
             var comeInDays : [Bool] = []
@@ -166,15 +166,12 @@ class MainViewController: UIViewController {
                 }
             }
             
-            var openDoorNotif = false
-            if( openDoorNotifStr == "T" ){
-                openDoorNotif = true
-            }
             
-        
-            let curFriend = Friend( id, fullName, image, comeInDays, openDoorNotif )
+            let curFriend = Friend( id, fullName, image, comeInDays, openDoorNotif  )
             myUser.addFriend( curFriend )
         }
+        
+        // add devices if any 
         
         return myUser
 

@@ -48,7 +48,7 @@ class UserMainViewController: UIViewController {
     @IBAction func readFromCloud(_ sender: Any) {
         
         let parameters: Parameters = ["infoRequested": "allUsersInfo"]     //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
-        let ipAddress = "23.96.59.16"
+        let ipAddress = "doorlockvm.eastus.cloudapp.azure.com"
         let url = "http://\(ipAddress):5000/sqlQuery"
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             print(response)
