@@ -9,5 +9,6 @@ target 'smartLock' do
   pod 'SwiftyJSON'
   pod 'TextFieldEffects'
   pod 'Alamofire'
+  pod 'AlamofireImage'
 
 end

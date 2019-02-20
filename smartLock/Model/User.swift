@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class User{
+class User {
     let id: Int
     var profileImg: UIImage?
     var firstName: String

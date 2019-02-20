@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Device{
+class Device {
     let id: Int
     var deviceName: String
     var doorWasOpenedNotif: Bool

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+
 class FriendTableViewCell: UITableViewCell {
     
     // MARK: UI/UX
@@ -36,13 +39,31 @@ class FriendTableViewCell: UITableViewCell {
     
         fullNameLabel.text = "\(friend.firstName) \(friend.lastName)"
         
-        imageF.image = friend.image
+        //imageF.image = friend.image
         imageF.layer.cornerRadius = 24.5
         imageF.clipsToBounds = true
         imageF.layer.borderWidth = 0.5
         imageF.layer.borderColor = UIColor.black.cgColor
-        
         setWeekDaysLabels( with: friend )
+        
+        // Get the image from the cloud to be displayed
+        let parameters: Parameters = ["friendImageName": friend.imageName ]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/getFriendImage"
+        Alamofire.request(url, method: .get, parameters: parameters).responseImage { response in
+
+            if response.result.isSuccess {
+                // show the image from the DB
+                self.imageF.image = response.result.value!
+                friend.image = response.result.value!
+                
+                
+            }else{
+                // set temp image
+                self.imageF.image = UIImage(named: "img_placeholder")
+                friend.image = UIImage(named: "img_placeholder")!
+                
+            }
+        }
 
     }
     

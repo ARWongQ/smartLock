@@ -8,6 +8,7 @@
 
 import UIKit
 import TextFieldEffects
+import Alamofire
 
 // Protocol
 // Triggered when the user changes the info of a friend or adds a new friend
@@ -104,10 +105,15 @@ class FriendInfoViewController: UIViewController {
         }
     }
     
+
+    
     // updates the profile pic as needed
     func updateProfilePicture( withImage image: UIImage){
+
+        // setting the image
         profileImageButton.setBackgroundImage( image, for: .normal )
         updateSaveButtonState()
+        
     }
     
     // need to also make sure an image has been added!
@@ -120,7 +126,6 @@ class FriendInfoViewController: UIViewController {
     
     // compares two images
     func compareImages(image1: UIImage, isEqualTo image2: UIImage) -> Bool {
-        print("HELLO")
         let data1: NSData = image1.pngData()! as NSData
         let data2: NSData = image2.pngData()! as NSData
         return data1.isEqual(data2)
@@ -163,8 +168,10 @@ class FriendInfoViewController: UIViewController {
                 let id = friend?.id,
                 let myImage = profileImageButton.currentBackgroundImage
                 else { return }
-            let editedFriend = Friend( id, firstN, lastN, myImage, comeInDays, openDoorNotification )
+            
+            let editedFriend = Friend( id, firstN, lastN, comeInDays, openDoorNotification )
             delegate?.updateFriend(with: editedFriend )
+            updateImageDB( myImage, editedFriend.imageName )
             
             self.navigationController?.popToRootViewController( animated: true )
         
@@ -173,8 +180,10 @@ class FriendInfoViewController: UIViewController {
             // testing purposes
             let id = 4
             let myImage = profileImageButton.currentBackgroundImage!
-            let newFriend = Friend( id, firstN, lastN, myImage, comeInDays, openDoorNotification )
+            
+            let newFriend = Friend( id, firstN, lastN, comeInDays, openDoorNotification )
             delegate?.addNewFriend(with: newFriend )
+            updateImageDB( myImage, newFriend.imageName )
             self.dismiss( animated: true, completion: nil )
         }
         
@@ -184,6 +193,7 @@ class FriendInfoViewController: UIViewController {
         let allButtons = [ sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton ]
         var comeInDays : [Bool] = [ true, true, true, true, true, true, true ]
         
+        // set the color of the buttons
         for i in 0...6 {
             guard let currButton =  allButtons[ i ] else { return comeInDays }
             if( currButton.backgroundColor == UIColor.lightGray ){
@@ -204,6 +214,33 @@ class FriendInfoViewController: UIViewController {
         }else{
             self.dismiss( animated: true, completion: nil )
         }
+    }
+    
+    ////////////////////////////////////////////////////////////
+    // MARK: CLOUD/DB
+    // updates the image in the DB
+    func updateImageDB( _ image: UIImage, _ imageName: String ){
+        print("Updating image in the DB")
+        guard let data = image.jpegData(compressionQuality: 1) else { return }
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/postFriendImage"
+        
+        Alamofire.upload( multipartFormData: { (form) in
+            form.append(data, withName: "file", fileName: imageName, mimeType:"image/jpeg")
+        }, to: url, encodingCompletion: { result in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    if( response.value == "No Face"){
+                        
+                    }
+                    
+                }
+            case .failure( let encodingError):
+                print(encodingError)
+                
+            }
+        } )
+        
     }
     
 }

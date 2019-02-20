@@ -15,17 +15,19 @@ class Friend: CustomStringConvertible, Comparable {
     let id: Int
     var firstName: String
     var lastName: String
+    var imageName: String
     var image: UIImage
     var comeInDays: [Bool]
     var openDoorNotification: Bool
     
     
-    init( _ _id: Int, _ _firstName: String, _ _lastName: String, _ _image: UIImage, _ _comeInDays: [Bool], _ _openDoorNotification: Bool ){
+    init( _ _id: Int, _ _firstName: String, _ _lastName: String, _ _comeInDays: [Bool], _ _openDoorNotification: Bool ){
         // Set all properties
         id = _id
         firstName = _firstName
         lastName = _lastName
-        image = _image
+        image = UIImage(named: "img_placeholder")!
+        imageName = "\(id)_\(firstName)_\(lastName).jpeg"
         comeInDays = _comeInDays
         openDoorNotification = _openDoorNotification
 
@@ -46,5 +48,6 @@ class Friend: CustomStringConvertible, Comparable {
         return lhs.id == rhs.id
     }
     
-
+    
 }
+

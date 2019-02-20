@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class UserAccountTableViewController: UITableViewController, ChangeBasicInformationDelegate {
     
@@ -14,19 +16,25 @@ class UserAccountTableViewController: UITableViewController, ChangeBasicInformat
     // MARK: - Delegate Functions
     // changes the name, email and password of the user
     func changeInfo(type: String, data: [String]) {
+        
+        // Update a temp user in case updating to the DB fails
+        guard let tempUser = currentUser else { return }
         switch type{
         case settingsKeys.name:
-            currentUser?.updateName( _firstName: data[0], _lastName: data[1] )
+            tempUser.updateName( _firstName: data[0], _lastName: data[1] )
             
         case settingsKeys.email:
-            currentUser?.updateEmail( _email: data[0] )
+            tempUser.updateEmail( _email: data[0] )
             
         case settingsKeys.changePassword:
-            currentUser?.updatePassword( _password: data[0])
+            tempUser.updatePassword( _password: data[0])
             
         default:
             print( "Fatal Error")
         }
+        
+        // Update the user in the cloud DB
+        updateUserDB( tempUser )
         
         tableView.reloadData()
     }
@@ -136,11 +144,14 @@ class UserAccountTableViewController: UITableViewController, ChangeBasicInformat
         guard let currentUser = currentUser,
             let currentProfileImg = currentUser.profileImg
             else {
+                // Failure to get an image
                 profileButton.setBackgroundImage( UIImage(named: "img_placeholder"), for: .normal )
                 return
         }
         
         profileButton.setBackgroundImage( currentProfileImg, for: .normal )
+        
+        // Sending the new picture to the cloud 
     }
     
     ///////////////////////////////////////////////////////////////////////////////
@@ -152,6 +163,34 @@ class UserAccountTableViewController: UITableViewController, ChangeBasicInformat
         destinationVC.delegate = self
     }
 
+    ////////////////////////////////////////////////////////////
+    // MARK: CLOUD/DB
+    
+    // updates a the user's info in the cloud's DB
+    func updateUserDB( _ user: User ) {
+        print("Updating User")
+        
+        let parameters: Parameters = ["infoRequested": "postUpdateUser", "id": "" ]
+        let ipAddress = "23.96.59.16"
+        let url = "http://\(ipAddress):5000/sqlQuery"
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+            print( response.result.isSuccess )
+            if response.result.isSuccess {
+                // Update the user
+                self.currentUser = user
+                
+                
+                
+            }else{
+                // SHOW ERROR MESSAGE, Failed to update the DB
+                
+                
+                
+            }
+        }
+        
+    }
 
 
 }
