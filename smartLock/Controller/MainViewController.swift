@@ -60,6 +60,25 @@ class MainViewController: UIViewController {
         let email = emailTextField.text!
         let password = passwordTextField.text!
         self.getUserAuthenticationFromDB( email, password )
+        
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Only for testing
+        // for now we are just creating our own user
+//        let tempUser = User(1, "Augusto", "Wong", "arwong@wpi.edu", "123456")
+//        let friends = [
+//            Friend( 1, "Mario", "Zyla", UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
+//            Friend( 2, "Aleksander",  "Ibro", UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
+//            Friend( 3, "Carlos",  "Galo" , UIImage(named: "testImage.png")!, [ true, true, true, true, true, true, true ], true )]
+//
+//        for friend in friends{
+//            tempUser.addFriend(friend)
+//        }
+//
+//        self.user = tempUser
+//
+//        // Go the next screen
+//        self.performSegue(withIdentifier: "mainToUserMain", sender: self )
 
         
     }
@@ -92,11 +111,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    // function to validate the user
-    func validateUser( email: String, password: String ) -> Bool {
-        //return (email == UserAugusto.email && password == UserAugusto.password)
-        return true 
-    }
     
     //unwind a view back to main screen
     @IBAction func unwindToMainVC( unwindSegue: UIStoryboardSegue ) {
@@ -107,12 +121,11 @@ class MainViewController: UIViewController {
     // MARK: CLOUD/DB
     // Gets the user from the database
     func getUserAuthenticationFromDB( _ email: String, _ password: String ){
-        let myEmail = "arwong@wpi.edu"
+        let myEmail = "aibro@wpi.edu"
         let myPassword = "123456"
         //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
         let parameters: Parameters = ["infoRequested": "getUserAuthentication", "email": myEmail, "password": myPassword ]
-        let ipAddress = "doorlockvm.eastus.cloudapp.azure.com"
-        let url = "http://\(ipAddress):5000/sqlQuery"
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
         
         Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             print("MY RESPONSE")
@@ -129,10 +142,17 @@ class MainViewController: UIViewController {
                 
             }else{
                 // SHOW ERROR MESSAGE
+                
+                
+                
+                
+                
             }
         }
         
     }
+    
+    
     
     //Creates a user from a json
     func createUser( user: JSON  ) -> User {
@@ -151,7 +171,6 @@ class MainViewController: UIViewController {
             let id = value["id"].intValue
             let firstN = value["firstName"].stringValue
             let lastN = value["lastName"].stringValue
-            let fullName = "\(firstN) \(lastN)"
             let image = UIImage(named: "img_placeholder")!
             let comeInDaysStr = value["comeInDays"].stringValue
             let openDoorNotif = value["doorNotification"].intValue == 1
@@ -166,8 +185,9 @@ class MainViewController: UIViewController {
                 }
             }
             
-            
-            let curFriend = Friend( id, fullName, image, comeInDays, openDoorNotif  )
+        
+            let curFriend = Friend( id, firstN, lastN, comeInDays, openDoorNotif )
+            setImageFromDB( curFriend )
             myUser.addFriend( curFriend )
         }
         
@@ -175,6 +195,26 @@ class MainViewController: UIViewController {
         
         return myUser
 
+    }
+    
+    // get the image from the Db for a requested friend
+    func setImageFromDB( _ friend: Friend){
+        
+        let parameters: Parameters = ["friendImageName": friend.imageName ]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/getFriendImage"
+        Alamofire.request(url, method: .get, parameters: parameters).responseImage { response in
+            
+            if response.result.isSuccess {
+                // show the image from the DB
+                print("SETTING IMAGE OF FRIEND")
+                friend.image = response.result.value!
+                
+            }else{
+                // set temp image
+                friend.image = UIImage(named: "img_placeholder")!
+                
+            }
+        }
     }
 
 

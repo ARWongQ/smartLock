@@ -32,13 +32,11 @@ class UserMainViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes =
             [ NSAttributedString.Key.foregroundColor: UIColor.white ]
         
-     
-        
        
     }
     
     @IBAction func liveButtonPressed(_ sender: Any) {
-        let myURL = URL(string:"http://doorlockmqpboard.ddns.net:8000/index.html")
+        let myURL = URL(string:"http://doorlockmqpboard.ddns.net")
         let myRequest = URLRequest(url: myURL!)
         
         liveStreamWebView.load(myRequest)

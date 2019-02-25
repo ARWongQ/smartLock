@@ -1,0 +1,15 @@
+//
+//  Bridging-Header.h
+//  smartLock
+//
+//  Created by Mario Zyla on 2/20/19.
+//  Copyright © 2019 WPI. All rights reserved.
+//
+
+#ifndef Bridging_Header_h
+#define Bridging_Header_h
+
+#import <AZSClient/AZSClient.h>
+
+
+#endif /* Bridging_Header_h */

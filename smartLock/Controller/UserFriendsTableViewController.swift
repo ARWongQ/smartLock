@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate {
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: Delegate Functions
     // Updates a friend from my list of friends
     func updateFriend( with friend: Friend ){
-        
+
         if let index = getFriendIndex(id: friend.id ){
             currentUser?.friends.remove(at: index )
-            currentUser?.friends.insert( friend, at: friend.id - 1 )
+            currentUser?.friends.append( friend )
             tableView.reloadData()
         }
 
@@ -61,6 +62,8 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes =
             [ NSAttributedString.Key.foregroundColor: UIColor.white ]
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,7 +71,13 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         
         // Get the current user and update the UI
         let tabbar = tabBarController as! UserTabBarController
+        
+        // Get the admin and sort the friends
+        if let myUser = tabbar.currentUser{
+            myUser.friends = myUser.friends.sorted(by: < )
+        }
         currentUser = tabbar.currentUser
+        
         tableView.reloadData()
     }
     
@@ -141,8 +150,13 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         if editingStyle == .delete {
             guard let currentUser = currentUser else { return }
             
-            currentUser.friends.remove(at: indexPath.row )
+            // delete the friend from the table view
+            let deletedFriend = currentUser.friends.remove(at: indexPath.row )
             tableView.deleteRows(at: [indexPath], with: .automatic )
+            
+            // delete friend from the cloud
+            deleteFriendFromDB( deletedFriend )
+            
         }
     }
     
@@ -155,13 +169,14 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: - View Transitions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        guard let currentUser = currentUser else {return}
         // Show a friend's detail
         if segue.identifier == "showDetails" {
             let destinationVC = segue.destination as! FriendInfoViewController
             let indexPath = tableView.indexPathForSelectedRow!
-            let selectedFriend = currentUser?.friends[ indexPath.row ]
+            let selectedFriend = currentUser.friends[ indexPath.row ]
             destinationVC.friend = selectedFriend
+            destinationVC.currentUserID = currentUser.id
             destinationVC.delegate = self
         }
             
@@ -170,10 +185,31 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
             let destinationVC = segue.destination as! UINavigationController
             let nextViewController = destinationVC.viewControllers[0] as! FriendInfoViewController
             nextViewController.delegate = self
+            nextViewController.currentUserID = currentUser.id
         }
     }
     
+    ////////////////////////////////////////////////////////////
+    // MARK: CLOUD/DB
     
+    // delete a friend from the DB
+    func deleteFriendFromDB( _ friend: Friend) {
+        let parameters: Parameters = ["infoRequested": "postDeleteFriend",
+                                      "id": friend.id,
+                                      "friendImageName" : friend.imageName]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
+            if response.result.isSuccess {
+                
+                
+            }else{
+                // SHOW ERROR MESSAGE
+                
+            }
+        }
+        
+    }
 
 
 }

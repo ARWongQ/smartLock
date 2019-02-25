@@ -28,7 +28,8 @@
 		1355266222015C8700B49139 /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1355266122015C8700B49139 /* testImage.png */; };
 		13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552663220166CA00B49139 /* FriendInfoViewController.swift */; };
 		13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */; };
-		BE75B1FAC77E088C2E3637EC /* Pods_smartLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3413921503AC3A13F7535318 /* Pods_smartLock.framework */; };
+		2F05A7C4221D909F00A4FC7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */; };
+		57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894EEC3048304F116E81FF53 /* Pods_smartLock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,9 +56,11 @@
 		1355266122015C8700B49139 /* testImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImage.png; sourceTree = "<group>"; };
 		13552663220166CA00B49139 /* FriendInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInfoViewController.swift; sourceTree = "<group>"; };
 		13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		3413921503AC3A13F7535318 /* Pods_smartLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smartLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F7546767459F3109329E8E0C /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
-		FEF25162CCFCC509B5A860B3 /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
+		1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
+		2F05A7C2221D855C00A4FC7A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
+		894EEC3048304F116E81FF53 /* Pods_smartLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smartLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE75B1FAC77E088C2E3637EC /* Pods_smartLock.framework in Frameworks */,
+				57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,8 +89,8 @@
 			children = (
 				133B56AD21ADE87F00DCF0F9 /* smartLock */,
 				133B56AC21ADE87F00DCF0F9 /* Products */,
-				F185A0341672BD550F6CB7C3 /* Pods */,
-				72C3F62FB0D99DB4D6073E38 /* Frameworks */,
+				3B329BEBEC83F8ACEC2492A9 /* Pods */,
+				D4DCBF4CF91DCB05F3D543C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +105,7 @@
 		133B56AD21ADE87F00DCF0F9 /* smartLock */ = {
 			isa = PBXGroup;
 			children = (
+				2F05A7C2221D855C00A4FC7A /* Bridging-Header.h */,
 				133B56BA21ADE88000DCF0F9 /* Info.plist */,
 				132DF75C2202136100AA10CC /* CellViews */,
 				133B56C221ADE8A500DCF0F9 /* Controller */,
@@ -136,6 +140,7 @@
 		133B56C221ADE8A500DCF0F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */,
 				132E417221EEE85C007CB660 /* UserTabBarController.swift */,
 				13552663220166CA00B49139 /* FriendInfoViewController.swift */,
 				1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */,
@@ -159,21 +164,21 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		72C3F62FB0D99DB4D6073E38 /* Frameworks */ = {
+		3B329BEBEC83F8ACEC2492A9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3413921503AC3A13F7535318 /* Pods_smartLock.framework */,
+				41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */,
+				1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */,
 			);
-			name = Frameworks;
+			path = Pods;
 			sourceTree = "<group>";
 		};
-		F185A0341672BD550F6CB7C3 /* Pods */ = {
+		D4DCBF4CF91DCB05F3D543C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FEF25162CCFCC509B5A860B3 /* Pods-smartLock.debug.xcconfig */,
-				F7546767459F3109329E8E0C /* Pods-smartLock.release.xcconfig */,
+				894EEC3048304F116E81FF53 /* Pods_smartLock.framework */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,11 +188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 133B56BD21ADE88000DCF0F9 /* Build configuration list for PBXNativeTarget "smartLock" */;
 			buildPhases = (
-				BA6B95B8CDD25FC56F36134B /* [CP] Check Pods Manifest.lock */,
+				6A0C798B040AA2A69F76661B /* [CP] Check Pods Manifest.lock */,
 				133B56A721ADE87F00DCF0F9 /* Sources */,
 				133B56A821ADE87F00DCF0F9 /* Frameworks */,
 				133B56A921ADE87F00DCF0F9 /* Resources */,
-				ABFD19C90C66B17F9BB8813A /* [CP] Embed Pods Frameworks */,
+				BEBE52C813742B93EF2152EF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,39 +246,14 @@
 				133B56B921ADE88000DCF0F9 /* LaunchScreen.storyboard in Resources */,
 				133B56B621ADE88000DCF0F9 /* Assets.xcassets in Resources */,
 				133B56B421ADE87F00DCF0F9 /* Main.storyboard in Resources */,
+				2F05A7C4221D909F00A4FC7A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		ABFD19C90C66B17F9BB8813A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA6B95B8CDD25FC56F36134B /* [CP] Check Pods Manifest.lock */ = {
+		6A0C798B040AA2A69F76661B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -293,6 +273,42 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEBE52C813742B93EF2152EF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AZSClient/AZSClient.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AZSClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -461,7 +477,7 @@
 		};
 		133B56BE21ADE88000DCF0F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FEF25162CCFCC509B5A860B3 /* Pods-smartLock.debug.xcconfig */;
+			baseConfigurationReference = 41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,8 +487,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockTwo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "smartLock/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -480,7 +497,7 @@
 		};
 		133B56BF21ADE88000DCF0F9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7546767459F3109329E8E0C /* Pods-smartLock.release.xcconfig */;
+			baseConfigurationReference = 1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -490,7 +507,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockTwo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

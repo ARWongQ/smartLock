@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+
 class FriendTableViewCell: UITableViewCell {
     
     // MARK: UI/UX
@@ -34,16 +37,15 @@ class FriendTableViewCell: UITableViewCell {
     // Updates the cell view
     func update( with friend: Friend ){
     
-        fullNameLabel.text = friend.fullName
+        fullNameLabel.text = "\(friend.firstName) \(friend.lastName)"
         
-        imageF.image = friend.image
+        //imageF.image = friend.image
         imageF.layer.cornerRadius = 24.5
         imageF.clipsToBounds = true
         imageF.layer.borderWidth = 0.5
         imageF.layer.borderColor = UIColor.black.cgColor
-        
+        imageF.image = friend.image
         setWeekDaysLabels( with: friend )
-
     }
     
     // Sets the weekdays labels
