@@ -36,7 +36,7 @@ class FriendTableViewCell: UITableViewCell {
     // MARK: UI Functions
     // Updates the cell view
     func update( with friend: Friend ){
-    
+        print( friend )
         fullNameLabel.text = "\(friend.firstName) \(friend.lastName)"
         
         //imageF.image = friend.image

@@ -28,6 +28,7 @@
 		1355266222015C8700B49139 /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1355266122015C8700B49139 /* testImage.png */; };
 		13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552663220166CA00B49139 /* FriendInfoViewController.swift */; };
 		13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */; };
+		13C316112226246F00AE9A9A /* AdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C316102226246F00AE9A9A /* AdminTableViewCell.swift */; };
 		57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894EEC3048304F116E81FF53 /* Pods_smartLock.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		1355266122015C8700B49139 /* testImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImage.png; sourceTree = "<group>"; };
 		13552663220166CA00B49139 /* FriendInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInfoViewController.swift; sourceTree = "<group>"; };
 		13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		13C316102226246F00AE9A9A /* AdminTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTableViewCell.swift; sourceTree = "<group>"; };
 		1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
 		2E69EBC6DC2452BEE93C3473 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
 		4061528562EA75D222AA1A36 /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				1323647121F687420027E2C7 /* AccountTableViewCell.swift */,
 				1355265F220154FF00B49139 /* FriendTableViewCell.swift */,
+				13C316102226246F00AE9A9A /* AdminTableViewCell.swift */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */,
 				1323647221F687420027E2C7 /* AccountTableViewCell.swift in Sources */,
 				132E417021EEE832007CB660 /* UserSettingsViewController.swift in Sources */,
+				13C316112226246F00AE9A9A /* AdminTableViewCell.swift in Sources */,
 				132E417321EEE85C007CB660 /* UserTabBarController.swift in Sources */,
 				133B56B121ADE87F00DCF0F9 /* MainViewController.swift in Sources */,
 				13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */,
