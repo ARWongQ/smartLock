@@ -10,6 +10,10 @@
 #define Bridging_Header_h
 
 #import <AZSClient/AZSClient.h>
+#import <MicrosoftAzureMobile/MicrosoftAzureMobile.h>
+#import <WindowsAzureMessaging/WindowsAzureMessaging.h>
+#import <UserNotifications/UserNotifications.h>
+#import "HubInfo.h"
 
 
 #endif /* Bridging_Header_h */

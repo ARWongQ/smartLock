@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotificationsUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,15 +17,97 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // To store the information of the user in the tab bar controller
     var myTabBarVC: UITabBarController?
-
+    
+    // For Azure App Services (backend)
+    let client = ClientManager.sharedClient // from ClientManager.swift
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
+        // Azure App Services
+//        self.client = MSClient(
+//            applicationURLString:"https://smartdoorlock.azurewebsites.net"
+//        )
+        
+        /* Look this for adding an item to Azure SQL database */
+        /* TODO: find out if I need easy Tables at all */
+        // Testing adding an item
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let client = delegate.client
+//        // id needs to be lowercase and a String
+//        let item = ["id": "19", "FIRST_NAME":"Kristi", "LAST_NAME":"Bejko", "EMAIL":"kbejko@wpi.edu"]
+//        let itemTable = client.table(withName: "App_User_Test")
+//        //client.getTable("App_User").insert(item)
+//        itemTable.insert(item) {
+//            (insertedItem, error) in
+//            if (error != nil) {
+//                print("Error" + error.debugDescription);
+//            } else {
+//                print("Item inserted, id: ", insertedItem!["id"]!)
+//            }
+//        }
+//
+        let center = UNUserNotificationCenter.current()
+        // Request permission to display alerts and play sounds.
+        center.requestAuthorization(options: [.alert, .badge, .sound])
+        { (granted, error) in
+            // Enable or disable features based on authorization.
+            if (granted){
+                print("Successfully received authorization from User")
+            }
+        }
+        
+        /* Azure Notification Hub */
+        application.registerForRemoteNotifications()
+        
         return true
     }
 
+    
+    /* For Push Notifications Handling */
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        ClientManager.sharedClient.push.registerDeviceToken(deviceToken as Data) { error in
+            // it's fine if this is nil
+            print("Error registering for notifications: ", error?.localizedDescription)
+        }
+        
+        print("Registration end")
+    }
+    
+    func application(_ application: UIApplication,
+                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register for remote notifications: ", error.localizedDescription)
+    }
+    
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [String: AnyObject]) {
+        
+        print(userInfo)
+        
+        let apsNotification = userInfo["aps"] as! NSDictionary
+        let apsString       = apsNotification["alert"] as! String
+        
+        let alert = UIAlertController(title: "Alert", message: apsString, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            print("OK")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in
+            print("Cancel")
+        }
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        var currentViewController = self.window?.rootViewController
+        while currentViewController?.presentedViewController != nil {
+            currentViewController = currentViewController?.presentedViewController
+        }
+        
+        currentViewController?.present(alert, animated: true) {}
+        
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

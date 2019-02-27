@@ -29,6 +29,11 @@
 		13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552663220166CA00B49139 /* FriendInfoViewController.swift */; };
 		13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */; };
 		2F05A7C4221D909F00A4FC7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */; };
+		2FD2D920222577F700238496 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */; };
+		2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D921222578BC00238496 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D923222578FD00238496 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2FD2D9272225BEEE00238496 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */; };
+		2FD2D92A2225CAA100238496 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD2D9292225CAA100238496 /* ClientManager.swift */; };
 		57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894EEC3048304F116E81FF53 /* Pods_smartLock.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +64,14 @@
 		1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
 		2F05A7C2221D855C00A4FC7A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2FD2D91C222574CF00238496 /* AZSClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AZSClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
+		2FD2D921222578BC00238496 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		2FD2D923222578FD00238496 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		2FD2D9252225BECF00238496 /* smartLock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = smartLock.entitlements; sourceTree = "<group>"; };
+		2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
+		2FD2D9282225C04700238496 /* HubInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
+		2FD2D9292225CAA100238496 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
 		41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
 		894EEC3048304F116E81FF53 /* Pods_smartLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smartLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -68,6 +81,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */,
+				2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */,
+				2FD2D920222577F700238496 /* MicrosoftAzureMobile.framework in Frameworks */,
+				2FD2D9272225BEEE00238496 /* WindowsAzureMessaging.framework in Frameworks */,
 				57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +104,10 @@
 		133B56A221ADE87F00DCF0F9 = {
 			isa = PBXGroup;
 			children = (
+				2FD2D9292225CAA100238496 /* ClientManager.swift */,
+				2FD2D9282225C04700238496 /* HubInfo.h */,
+				2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */,
+				2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */,
 				133B56AD21ADE87F00DCF0F9 /* smartLock */,
 				133B56AC21ADE87F00DCF0F9 /* Products */,
 				3B329BEBEC83F8ACEC2492A9 /* Pods */,
@@ -105,6 +126,7 @@
 		133B56AD21ADE87F00DCF0F9 /* smartLock */ = {
 			isa = PBXGroup;
 			children = (
+				2FD2D9252225BECF00238496 /* smartLock.entitlements */,
 				2F05A7C2221D855C00A4FC7A /* Bridging-Header.h */,
 				133B56BA21ADE88000DCF0F9 /* Info.plist */,
 				132DF75C2202136100AA10CC /* CellViews */,
@@ -176,6 +198,9 @@
 		D4DCBF4CF91DCB05F3D543C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FD2D923222578FD00238496 /* SafariServices.framework */,
+				2FD2D921222578BC00238496 /* WebKit.framework */,
+				2FD2D91C222574CF00238496 /* AZSClient.framework */,
 				894EEC3048304F116E81FF53 /* Pods_smartLock.framework */,
 			);
 			name = Frameworks;
@@ -215,6 +240,11 @@
 				TargetAttributes = {
 					133B56AA21ADE87F00DCF0F9 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -327,6 +357,7 @@
 				133C73E321B7330800B65C95 /* UserMainViewController.swift in Sources */,
 				132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */,
 				1323647221F687420027E2C7 /* AccountTableViewCell.swift in Sources */,
+				2FD2D92A2225CAA100238496 /* ClientManager.swift in Sources */,
 				132E417021EEE832007CB660 /* UserSettingsViewController.swift in Sources */,
 				132E417321EEE85C007CB660 /* UserTabBarController.swift in Sources */,
 				133B56B121ADE87F00DCF0F9 /* MainViewController.swift in Sources */,
@@ -480,18 +511,25 @@
 			baseConfigurationReference = 41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = smartLock/smartLock.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DS9Q4NU47H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = smartLock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFour;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "smartLock/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s arm64e arm64";
 			};
 			name = Debug;
 		};
@@ -500,17 +538,70 @@
 			baseConfigurationReference = 1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = smartLock/smartLock.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DS9Q4NU47H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = smartLock/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFour;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"xml2.2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"AlamofireImage\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TextFieldEffects\"",
+					"-framework",
+					"\"nanopb\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
