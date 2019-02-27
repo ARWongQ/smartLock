@@ -9,7 +9,6 @@
 import UIKit
 import TextFieldEffects
 import Alamofire
-import Firebase
 
 
 // Protocol

@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>742411901600-beog3tgu3ucuo7eebmqdgqilmh4u3nqb.apps.googleusercontent.com</string>
+	<string>371470834595-htqrmlnc10beragpogr7f99snr5sgo8l.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.742411901600-beog3tgu3ucuo7eebmqdgqilmh4u3nqb</string>
+	<string>com.googleusercontent.apps.371470834595-htqrmlnc10beragpogr7f99snr5sgo8l</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCUKaF5H-T3b6GuUVb789AoWMfb1QeJnZY</string>
+	<string>AIzaSyA_mP1kn5skqsuQlhm992DCQT9cIsntTws</string>
 	<key>GCM_SENDER_ID</key>
-	<string>742411901600</string>
+	<string>371470834595</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.WPI.smartLockFour</string>
+	<string>com.WPI.smartLockThree</string>
 	<key>PROJECT_ID</key>
-	<string>smartlock-2c880</string>
+	<string>smartlock-437d0</string>
 	<key>STORAGE_BUCKET</key>
-	<string>smartlock-2c880.appspot.com</string>
+	<string>smartlock-437d0.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:742411901600:ios:490a84d4ee06281b</string>
+	<string>1:371470834595:ios:77898521a77c30a9</string>
 	<key>DATABASE_URL</key>
-	<string>https://smartlock-2c880.firebaseio.com</string>
+	<string>https://smartlock-437d0.firebaseio.com</string>
 </dict>
 </plist>

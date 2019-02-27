@@ -10,8 +10,5 @@ target 'smartLock' do
   pod 'TextFieldEffects'
   pod 'Alamofire'
   pod 'AlamofireImage'
-  pod 'AZSClient'
-  pod 'Firebase/Core'
-  pod 'Firebase/Storage'
 
 end

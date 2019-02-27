@@ -28,7 +28,7 @@
 		1355266222015C8700B49139 /* testImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1355266122015C8700B49139 /* testImage.png */; };
 		13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552663220166CA00B49139 /* FriendInfoViewController.swift */; };
 		13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */; };
-		2F05A7C4221D909F00A4FC7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */; };
+		13C316112226246F00AE9A9A /* AdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C316102226246F00AE9A9A /* AdminTableViewCell.swift */; };
 		2FD2D920222577F700238496 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */; };
 		2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D921222578BC00238496 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D923222578FD00238496 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -61,9 +61,10 @@
 		1355266122015C8700B49139 /* testImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testImage.png; sourceTree = "<group>"; };
 		13552663220166CA00B49139 /* FriendInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInfoViewController.swift; sourceTree = "<group>"; };
 		13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		13C316102226246F00AE9A9A /* AdminTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTableViewCell.swift; sourceTree = "<group>"; };
 		1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
+		2E69EBC6DC2452BEE93C3473 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
 		2F05A7C2221D855C00A4FC7A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FD2D91C222574CF00238496 /* AZSClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AZSClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		2FD2D921222578BC00238496 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -72,6 +73,7 @@
 		2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
 		2FD2D9282225C04700238496 /* HubInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		2FD2D9292225CAA100238496 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
+		4061528562EA75D222AA1A36 /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
 		41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
 		894EEC3048304F116E81FF53 /* Pods_smartLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smartLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 			children = (
 				1323647121F687420027E2C7 /* AccountTableViewCell.swift */,
 				1355265F220154FF00B49139 /* FriendTableViewCell.swift */,
+				13C316102226246F00AE9A9A /* AdminTableViewCell.swift */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -162,7 +165,6 @@
 		133B56C221ADE8A500DCF0F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2F05A7C3221D909F00A4FC7A /* GoogleService-Info.plist */,
 				132E417221EEE85C007CB660 /* UserTabBarController.swift */,
 				13552663220166CA00B49139 /* FriendInfoViewController.swift */,
 				1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */,
@@ -191,6 +193,8 @@
 			children = (
 				41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */,
 				1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */,
+				4061528562EA75D222AA1A36 /* Pods-smartLock.debug.xcconfig */,
+				2E69EBC6DC2452BEE93C3473 /* Pods-smartLock.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -276,7 +280,6 @@
 				133B56B921ADE88000DCF0F9 /* LaunchScreen.storyboard in Resources */,
 				133B56B621ADE88000DCF0F9 /* Assets.xcassets in Resources */,
 				133B56B421ADE87F00DCF0F9 /* Main.storyboard in Resources */,
-				2F05A7C4221D909F00A4FC7A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,27 +317,19 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AZSClient/AZSClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AZSClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -359,6 +354,7 @@
 				1323647221F687420027E2C7 /* AccountTableViewCell.swift in Sources */,
 				2FD2D92A2225CAA100238496 /* ClientManager.swift in Sources */,
 				132E417021EEE832007CB660 /* UserSettingsViewController.swift in Sources */,
+				13C316112226246F00AE9A9A /* AdminTableViewCell.swift in Sources */,
 				132E417321EEE85C007CB660 /* UserTabBarController.swift in Sources */,
 				133B56B121ADE87F00DCF0F9 /* MainViewController.swift in Sources */,
 				13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */,
@@ -453,6 +449,7 @@
 		};
 		133B56BC21ADE88000DCF0F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -526,7 +523,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.WPI.smartLockFive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "smartLock/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "armv7 armv7s arm64e arm64";

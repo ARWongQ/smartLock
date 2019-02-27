@@ -9,7 +9,9 @@
 import UIKit
 import Alamofire
 
-class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate {
+class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChangeFriendInfoDelegate {
+    
+    
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: Delegate Functions
     // Updates a friend from my list of friends
@@ -18,7 +20,7 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         if let index = getFriendIndex(id: friend.id ){
             currentUser?.friends.remove(at: index )
             currentUser?.friends.append( friend )
-            tableView.reloadData()
+            bottomTableView.reloadData()
         }
 
     }
@@ -43,14 +45,26 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
     // MARK: Useful Variables
     var currentUser: User?
     
-
+    ///////////////////////////////////////////////////////////////////////////////
+    // MARK: UI/UX
+    @IBOutlet weak var topTableView: UITableView!
+    @IBOutlet weak var bottomTableView: UITableView!
+    
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        topTableView.delegate = self
+        topTableView.dataSource = self
+        
+        bottomTableView.delegate = self
+        bottomTableView.dataSource = self
+        
         // prevent from having dividors after last cell
-        tableView.tableFooterView = UIView(frame: .zero)
+        topTableView.tableFooterView = UIView(frame: .zero)
+        bottomTableView.tableFooterView = UIView(frame: .zero)
+        
         
     }
 
@@ -78,7 +92,10 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         }
         currentUser = tabbar.currentUser
         
-        tableView.reloadData()
+        // update the viewa
+        topTableView.reloadData()
+        bottomTableView.reloadData()
+        
     }
     
     ///////////////////////////////////////////////////////////////////////////////
@@ -96,72 +113,118 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
     // MARK: - Table view data source
 
     // sections
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     // count per section
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
-            return currentUser?.friends.count ?? 0
-        }else{
-            return 0
+        var numRows = 0
+        switch tableView{
+        case topTableView:
+            numRows =  currentUser?.friends.count ?? 0
+        
+        case bottomTableView:
+            numRows =  currentUser?.friends.count ?? 0
+        
+        default:
+            print("Cant load proper tableView")
+            numRows = 0
         }
+        
+        return numRows
+
     }
     
     // display
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        switch tableView{
+        case bottomTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendTableViewCell
+            
+            
+            // updating the cell
+            if let friend = currentUser?.friends[ indexPath.row ] {
+                cell.update(with: friend )
+                cell.showsReorderControl = true
+            }
+            return cell
+    
+        case topTableView:
+            // TODO: NEED TO USE THE PROPER SHIT
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AdminCell", for: indexPath) as! AdminTableViewCell
+
+            // updating the cell
+            if let friend = currentUser?.friends[ indexPath.row ] {
+                cell.update(with: friend )
+                cell.showsReorderControl = true
+            }
+            return cell
         
-        
-        // updating the cell
-        if let friend = currentUser?.friends[ indexPath.row ] {
-            cell.update(with: friend )
-            cell.showsReorderControl = true
+        default:
+            print("Cant get proper cell")
+            let cell = UITableViewCell()
+            return cell
+            
         }
         
-        return cell
+       
+        
+        
+        
     }
     
     // editing ( re ordering )
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        if let movedFriend = currentUser?.friends.remove( at: sourceIndexPath.row ) {
-            currentUser?.friends.insert(movedFriend, at: destinationIndexPath.row )
-            tableView.reloadData()
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//
+//        if let movedFriend = currentUser?.friends.remove( at: sourceIndexPath.row ) {
+//            currentUser?.friends.insert(movedFriend, at: destinationIndexPath.row )
+//            tableView.reloadData()
+//        }
+//
+//    }
     
     // lets edit the cells
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
     // Adds delete to the editing capabilities
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
     // deletes a friend when requested
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle:
+        UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let currentUser = currentUser else { return }
             
-            // delete the friend from the table view
-            let deletedFriend = currentUser.friends.remove(at: indexPath.row )
-            tableView.deleteRows(at: [indexPath], with: .automatic )
+            switch tableView{
+            case bottomTableView:
+                // delete the friend from the table view
+                let deletedFriend = currentUser.friends.remove(at: indexPath.row )
+                tableView.deleteRows(at: [indexPath], with: .automatic )
+                
+                // delete friend from the cloud
+                deleteFriendFromDB( deletedFriend )
             
-            // delete friend from the cloud
-            deleteFriendFromDB( deletedFriend )
+            //TODO: NEED TO ADD CAPABILITIES FOR OWNER
+            case topTableView:
+                print("TODO WORK")
+                
+            default:
+                print("problem deleting a cell ")
+            }
             
         }
     }
     
     // changes the height of the cell
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 65 //or whatever you need
     }
@@ -173,7 +236,7 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         // Show a friend's detail
         if segue.identifier == "showDetails" {
             let destinationVC = segue.destination as! FriendInfoViewController
-            let indexPath = tableView.indexPathForSelectedRow!
+            let indexPath = bottomTableView.indexPathForSelectedRow!
             let selectedFriend = currentUser.friends[ indexPath.row ]
             destinationVC.friend = selectedFriend
             destinationVC.currentUserID = currentUser.id
