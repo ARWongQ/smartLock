@@ -45,34 +45,34 @@ class UserMainViewController: UIViewController {
     
     @IBAction func readFromCloud(_ sender: Any) {
         
-        let parameters: Parameters = ["infoRequested": "allUsersInfo"]     //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
-        let ipAddress = "doorlockvm.eastus.cloudapp.azure.com"
-        let url = "http://\(ipAddress):5000/sqlQuery"
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print(response)
-        }
-        
-        // storing a user in the db, by sending request to Flask server
-        let parameters2: Parameters = [
-            "addUsers" : [
-                "5" : [
-                    "first" : "Aleksander",
-                    "last" : "Ibro",
-                    "email" : "aibro@wpi.edu"
-                ],
-                "4" : [
-                    "first" : "Kristiano",
-                    "last" : "Bejko",
-                    "email" : "kbejko@wpi.edu"
-                ]
-            ]
-        ]
-//        let parameters2 : Parameters = [
-//            "users" : "Aleksander should be here"
+//        let parameters: Parameters = ["infoRequested": "allUsersInfo"]     //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
+//        let ipAddress = "doorlockvm.eastus.cloudapp.azure.com"
+//        let url = "http://\(ipAddress):5000/sqlQuery"
+//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+//            print(response)
+//        }
+//
+//        // storing a user in the db, by sending request to Flask server
+//        let parameters2: Parameters = [
+//            "addUsers" : [
+//                "5" : [
+//                    "first" : "Aleksander",
+//                    "last" : "Ibro",
+//                    "email" : "aibro@wpi.edu"
+//                ],
+//                "4" : [
+//                    "first" : "Kristiano",
+//                    "last" : "Bejko",
+//                    "email" : "kbejko@wpi.edu"
+//                ]
+//            ]
 //        ]
-//        let url2 = "http://52.168.123.64:5000/user"
-        
-        Alamofire.request(url, method: .post, parameters: parameters2, encoding: JSONEncoding.default)
+////        let parameters2 : Parameters = [
+////            "users" : "Aleksander should be here"
+////        ]
+////        let url2 = "http://52.168.123.64:5000/user"
+//
+//        Alamofire.request(url, method: .post, parameters: parameters2, encoding: JSONEncoding.default)
         
     }
     

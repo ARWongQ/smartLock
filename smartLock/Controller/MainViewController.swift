@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     // MARK: - Useful Variables
     //var userDevice = Device(_id: 1, _deviceName: "My First Device", _doorWasOpenedNotif: true, _someoneIsOutsideNotif: true, _leftOpenTime: 5 )
     var user : User?
+    let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -121,102 +123,95 @@ class MainViewController: UIViewController {
     // MARK: CLOUD/DB
     // Gets the user from the database
     func getUserAuthenticationFromDB( _ email: String, _ password: String ){
+        
+        /********* USER DOES NOT SIGN IN FOR THE MOMENT ********/
         let myEmail = "aibro@wpi.edu"
         let myPassword = "123456"
-        //This will be your parameter, infoRequested is gonna be the keyword we can check and allUsersInfo will be a string about what iPhone needs from the Flask Server
-        let parameters: Parameters = ["infoRequested": "getUserAuthentication", "email": myEmail, "password": myPassword ]
-        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
-        
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print("MY RESPONSE")
-            //print( response )
-            if response.result.isSuccess {
-                
-                // create the user with the DB info
-                let answerJSON : JSON = JSON( response.result.value! )
-                self.user = self.createUser(user: answerJSON)
-                
-                // Go the next screen
-                self.performSegue(withIdentifier: "mainToUserMain", sender: self )
-                
-                
-            }else{
-                // SHOW ERROR MESSAGE
-                
-                
-                
-                
-                
+        /*******************************************************/
+        let azureClient = myAppDelegate.client
+        let appUserTable = azureClient.table(withName: "App_User")
+        // Create a predicate that finds users with the given user name and password
+        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", myEmail, myPassword)
+        appUserTable.read(with : predicate) { (result, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else if let users = result?.items {
+                // users contains all users with matching predicate (only 1)
+                let userId = (users[0]["id"] as! NSString).intValue
+                // Getting user's friends
+                let friendTable = azureClient.table(withName: "Friend")
+                predicate = NSPredicate(format: "userId = %d", userId)
+
+                friendTable.read(with : predicate) { (result, error) in
+                    if let err = error {
+                        print("Error reading friends ", err)
+                    } else if let friends = result?.items {
+                        // create the user with friends
+                        self.user = self.createUser(user: users[0], friends: friends)
+
+                        // move to the next screen
+                        self.performSegue(withIdentifier: "mainToUserMain", sender: self)
+                    }
+                }
             }
         }
-        
     }
     
     
     
-    //Creates a user from a json
-    func createUser( user: JSON  ) -> User {
+    //Creates a user
+    func createUser( user: [AnyHashable : Any], friends: [[AnyHashable : Any]] ) -> User {
         // Create the user
-        let id = user["id"].intValue
-        let firstN = user["firstName"].stringValue
-        let lastN = user["lastName"].stringValue
-        let email = user["email"].stringValue
-        let password = user["password"].stringValue
-        var myUser = User( id, firstN, lastN, email,  password )
-        
-        // add friends if any
-        let friendsDic = user["friends"]
-        for (key,value) in friendsDic {
-            // create a user
-            let id = value["id"].intValue
-            let firstN = value["firstName"].stringValue
-            let lastN = value["lastName"].stringValue
-            let image = UIImage(named: "img_placeholder")!
-            let comeInDaysStr = value["comeInDays"].stringValue
-            let openDoorNotif = value["doorNotification"].intValue == 1
+        let id = (user["id"] as! NSString).intValue
+        let firstN = user["firstName"] as! String
+        let lastN = user["lastName"] as! String
+        let email = user["email"] as! String
+        let password = user["userPassword"] as! String
+        var myUser = User( Int(id), firstN, lastN, email,  password )
+
+        for friend in friends{
+            print(friend)
+            let id = friend["id"] as! String
+            print("Id of friend I am trying to add", id)
+
+            let firstN =  friend["friendFirstName"] as! String
+            let lastN =  friend["friendLastName"] as! String
+            let countInDays =  friend["friendCountInDays"] as! String
+            let doorNotification = ( friend["friendDoorNotification"] as! NSString ).intValue == 1
             
             // get the proper format for comeInDays and openDoorNotif
             var comeInDays : [Bool] = []
-            for char in comeInDaysStr{
+            for char in countInDays{
                 if( char == "T" ){
                     comeInDays.append( true )
                 }else if ( char == "F" ){
                     comeInDays.append( false )
                 }
             }
-            
-        
-            let curFriend = Friend( id, firstN, lastN, comeInDays, openDoorNotif )
+            let curFriend = Friend( id, firstN, lastN, comeInDays, doorNotification )
             setImageFromDB( curFriend )
             myUser.addFriend( curFriend )
         }
-        
-        // add devices if any 
-        
         return myUser
-
     }
     
     // get the image from the Db for a requested friend
     func setImageFromDB( _ friend: Friend){
-        
+        print("Getting picture ", friend.imageName)
         let parameters: Parameters = ["friendImageName": friend.imageName ]
         let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/getFriendImage"
         Alamofire.request(url, method: .get, parameters: parameters).responseImage { response in
-            
             if response.result.isSuccess {
                 // show the image from the DB
                 print("SETTING IMAGE OF FRIEND")
                 friend.image = response.result.value!
-                
             }else{
                 // set temp image
+                print("No image received for this friend")
                 friend.image = UIImage(named: "img_placeholder")!
                 
             }
         }
     }
-
-
 }
 

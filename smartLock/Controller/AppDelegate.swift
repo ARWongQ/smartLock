@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import UserNotificationsUI
 
 @UIApplicationMain
@@ -21,25 +20,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // For Azure App Services (backend)
     let client = ClientManager.sharedClient // from ClientManager.swift
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        // Use Firebase library to configure APIs
-        FirebaseApp.configure()
-        // Azure App Services
-//        self.client = MSClient(
-//            applicationURLString:"https://smartdoorlock.azurewebsites.net"
-//        )
         
+/**************************************** DO NOT REMOVE, we need it for testing *************************************************/
         /* Look this for adding an item to Azure SQL database */
         /* TODO: find out if I need easy Tables at all */
-        // Testing adding an item
+//        // Testing adding a user
 //        let delegate = UIApplication.shared.delegate as! AppDelegate
 //        let client = delegate.client
 //        // id needs to be lowercase and a String
-//        let item = ["id": "19", "FIRST_NAME":"Kristi", "LAST_NAME":"Bejko", "EMAIL":"kbejko@wpi.edu"]
-//        let itemTable = client.table(withName: "App_User_Test")
+//        let user = ["id": "1", "firstName":"Aleksander", "lastName":"Ibro", "email":"aibro@wpi.edu",
+//                    "userPassword":"123456", "userImage":"1_Aleksander_Ibro.jpeg"]
+//        let itemTable = client.table(withName: "App_User")
 //        //client.getTable("App_User").insert(item)
-//        itemTable.insert(item) {
+//        itemTable.insert(user) {
 //            (insertedItem, error) in
 //            if (error != nil) {
 //                print("Error" + error.debugDescription);
@@ -47,7 +43,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Item inserted, id: ", insertedItem!["id"]!)
 //            }
 //        }
-//
+//        // Testing adding a friend
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let client = delegate.client
+//        // id needs to be lowercase and a String
+//        let friend = ["id": "2", "friendFirstName":"Mario", "friendLastName":"Zyla", "friendCountInDays":"TTTFFTT",
+//                      "friendDoorNotification":"1", "friendImage":"2_Mario_Zyla.jpeg", "userId": "1"]
+//        let itemTable = client.table(withName: "Friend")
+//        itemTable.insert(friend) {
+//            (insertedItem, error) in
+//            if (error != nil) {
+//                print("Error" + error.debugDescription);
+//            } else {
+//                print("Item inserted, id: ", insertedItem!["id"]!)
+//            }
+//        }
+/**************************************** DO NOT REMOVE, we need it for testing *************************************************/
+
+
+        
+        // PUSH NOTIFICATIONS
         let center = UNUserNotificationCenter.current()
         // Request permission to display alerts and play sounds.
         center.requestAuthorization(options: [.alert, .badge, .sound])
