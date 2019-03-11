@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChangeFriendInfoDelegate {
+class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate {
     
     
     ///////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,7 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
         if let index = getFriendIndex(id: friend.id ){
             currentUser?.friends.remove(at: index )
             currentUser?.friends.append( friend )
-            bottomTableView.reloadData()
+            tableView.reloadData()
         }
 
     }
@@ -42,28 +42,31 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     ///////////////////////////////////////////////////////////////////////////////
+    // MARK: Structs
+    // all setting information
+    struct segmentValues {
+        static let friends = 0
+        static let admins = 1
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////
     // MARK: Useful Variables
     var currentUser: User?
+    var segmentValue: Int!
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: UI/UX
-    @IBOutlet weak var topTableView: UITableView!
-    @IBOutlet weak var bottomTableView: UITableView!
+
+    
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: App Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topTableView.delegate = self
-        topTableView.dataSource = self
-        
-        bottomTableView.delegate = self
-        bottomTableView.dataSource = self
-        
-        // prevent from having dividors after last cell
-        topTableView.tableFooterView = UIView(frame: .zero)
-        bottomTableView.tableFooterView = UIView(frame: .zero)
+        // set proper view
+        segmentValue = segmentValues.friends
+        tableView.tableFooterView = UIView( frame: .zero )
         
         
     }
@@ -72,10 +75,13 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
         super.viewWillAppear( animated )
         
         // Sets the title large and white
+        navigationController?.navigationBar.topItem?.title = "Guests"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes =
             [ NSAttributedString.Key.foregroundColor: UIColor.white ]
+        
+        
         
 
     }
@@ -86,15 +92,16 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
         // Get the current user and update the UI
         let tabbar = tabBarController as! UserTabBarController
         
-        // Get the admin and sort the friends
+        // Get the user and sort the friends and admins
         if let myUser = tabbar.currentUser{
             myUser.friends = myUser.friends.sorted(by: < )
+            myUser.admins = myUser.admins.sorted( by: < )
         }
         currentUser = tabbar.currentUser
         
-        // update the viewa
-        topTableView.reloadData()
-        bottomTableView.reloadData()
+        // update the view
+        tableView.reloadData()
+
         
     }
     
@@ -107,74 +114,93 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
 //        tableView.setEditing( !tableViewEditingMode, animated: true)
 //    }
     
- 
+    @IBAction func addButtonPressed(_ sender: Any) {
+        // alerts
+        let alertController = UIAlertController( title: "Choose to add ", message: nil, preferredStyle: .actionSheet )
+        
+        // create actions
+        let cancelAction = UIAlertAction( title: "Cancel", style: .cancel, handler: nil )
+        let adminAction = UIAlertAction( title: "Admin", style: .default, handler: nil )
+        let friendAction = UIAlertAction( title: "Friend", style: .default, handler: { action in
+            // proper view
+            self.performSegue(withIdentifier: "addFriend", sender: self )
+            
+        })
+        
+        // add actions
+        alertController.addAction( adminAction )
+        alertController.addAction( friendAction )
+        alertController.addAction( cancelAction )
+        
+        alertController.popoverPresentationController?.sourceView = sender as! UIButton
+        
+        present( alertController, animated: true, completion: nil )
+    }
+    
+    
+    // changes views between Friends and Admins
+    @IBAction func segmentedControlPressed(_ sender: UISegmentedControl) {
+        if segmentValue == segmentValues.friends{
+            segmentValue = segmentValues.admins
+        }else{
+            segmentValue = segmentValues.friends
+        }
+        
+        // reload useful info
+        tableView.reloadData()
+    }
+    
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: - Table view data source
 
     // sections
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     // count per section
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var numRows = 0
-        switch tableView{
-        case topTableView:
-            numRows =  currentUser?.friends.count ?? 0
-        
-        case bottomTableView:
-            numRows =  currentUser?.friends.count ?? 0
-        
-        default:
-            print("Cant load proper tableView")
-            numRows = 0
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var numRows: Int
+        if segmentValue == segmentValues.friends{
+            numRows = currentUser?.friends.count ?? 0
+        }else{
+            numRows = currentUser?.admins.count ?? 0
         }
-        
         return numRows
 
     }
     
     // display
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        switch tableView{
-        case bottomTableView:
+        
+        // display friends
+        if segmentValue == segmentValues.friends {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendTableViewCell
-            
-            
+
             // updating the cell
             if let friend = currentUser?.friends[ indexPath.row ] {
                 cell.update(with: friend )
                 cell.showsReorderControl = true
             }
             return cell
-    
-        case topTableView:
+            
+        // display admins
+        }else{
             // TODO: NEED TO USE THE PROPER SHIT
             let cell = tableView.dequeueReusableCell(withIdentifier: "AdminCell", for: indexPath) as! AdminTableViewCell
 
             // updating the cell
-            if let friend = currentUser?.friends[ indexPath.row ] {
-                cell.update(with: friend )
+            if let admin = currentUser?.admins[ indexPath.row ] {
+                cell.update(with: admin )
                 cell.showsReorderControl = true
             }
             return cell
-        
-        default:
-            print("Cant get proper cell")
-            let cell = UITableViewCell()
-            return cell
             
         }
-        
-       
-        
-        
-        
+
     }
     
     // editing ( re ordering )
@@ -188,43 +214,39 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
 //    }
     
     // lets edit the cells
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
     // Adds delete to the editing capabilities
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
     // deletes a friend when requested
-    func tableView(_ tableView: UITableView, commit editingStyle:
+    override func tableView(_ tableView: UITableView, commit editingStyle:
         UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let currentUser = currentUser else { return }
             
-            switch tableView{
-            case bottomTableView:
+            // delete a friend
+            // TODO: Need to send push notification when deleting invalid friend
+            if segmentValue == segmentValues.friends{
                 // delete the friend from the table view
                 let deletedFriend = currentUser.friends.remove(at: indexPath.row )
                 tableView.deleteRows(at: [indexPath], with: .automatic )
-                
+
                 // delete friend from the cloud
                 deleteFriendFromDB( deletedFriend )
-            
-            //TODO: NEED TO ADD CAPABILITIES FOR OWNER
-            case topTableView:
-                print("TODO WORK")
-                
-            default:
-                print("problem deleting a cell ")
+            }else{
+                // TODO: Delete an Admin
             }
             
         }
     }
     
     // changes the height of the cell
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 65 //or whatever you need
     }
@@ -233,10 +255,11 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: - View Transitions
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let currentUser = currentUser else {return}
+        
         // Show a friend's detail
         if segue.identifier == "showDetails" {
             let destinationVC = segue.destination as! FriendInfoViewController
-            let indexPath = bottomTableView.indexPathForSelectedRow!
+            let indexPath = tableView.indexPathForSelectedRow!
             let selectedFriend = currentUser.friends[ indexPath.row ]
             destinationVC.friend = selectedFriend
             destinationVC.currentUserID = currentUser.id

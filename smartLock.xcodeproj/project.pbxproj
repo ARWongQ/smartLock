@@ -22,6 +22,7 @@
 		133B56B921ADE88000DCF0F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133B56B721ADE88000DCF0F9 /* LaunchScreen.storyboard */; };
 		133B56C521ADF89700DCF0F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133B56C421ADF89700DCF0F9 /* User.swift */; };
 		133C73E321B7330800B65C95 /* UserMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133C73E221B7330800B65C95 /* UserMainViewController.swift */; };
+		1346CD372235EFC400134FB8 /* AdminInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1346CD362235EFC400134FB8 /* AdminInfo.swift */; };
 		1355265C2201220E00B49139 /* UserFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */; };
 		1355265E220122A900B49139 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1355265D220122A900B49139 /* Friend.swift */; };
 		13552660220154FF00B49139 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1355265F220154FF00B49139 /* FriendTableViewCell.swift */; };
@@ -50,6 +51,7 @@
 		133B56BA21ADE88000DCF0F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		133B56C421ADF89700DCF0F9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		133C73E221B7330800B65C95 /* UserMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMainViewController.swift; sourceTree = "<group>"; };
+		1346CD362235EFC400134FB8 /* AdminInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminInfo.swift; sourceTree = "<group>"; };
 		1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFriendsTableViewController.swift; sourceTree = "<group>"; };
 		1355265D220122A900B49139 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		1355265F220154FF00B49139 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				1355265D220122A900B49139 /* Friend.swift */,
 				132DF75F2206570E00AA10CC /* Device.swift */,
 				133B56C421ADF89700DCF0F9 /* User.swift */,
+				1346CD362235EFC400134FB8 /* AdminInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				132DF7602206570E00AA10CC /* Device.swift in Sources */,
 				13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */,
 				1323647A21F697600027E2C7 /* UserAccountEditingViewController.swift in Sources */,
+				1346CD372235EFC400134FB8 /* AdminInfo.swift in Sources */,
 				1355265C2201220E00B49139 /* UserFriendsTableViewController.swift in Sources */,
 				133C73E321B7330800B65C95 /* UserMainViewController.swift in Sources */,
 				132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */,

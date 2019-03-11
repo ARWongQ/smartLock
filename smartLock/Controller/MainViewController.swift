@@ -63,18 +63,30 @@ class MainViewController: UIViewController {
         
         
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Only for testing
-        // for now we are just creating our own user
+//        // Only for testing
+//        // for now we are just creating our own user
 //        let tempUser = User(1, "Augusto", "Wong", "arwong@wpi.edu", "123456")
+//        // add friends
 //        let friends = [
-//            Friend( 1, "Mario", "Zyla", UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
-//            Friend( 2, "Aleksander",  "Ibro", UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
-//            Friend( 3, "Carlos",  "Galo" , UIImage(named: "testImage.png")!, [ true, true, true, true, true, true, true ], true )]
+//            Friend( 1, "Mario", "Zyla", [ true, true, false, true, true, false, true ], true ),
+//            Friend( 2, "Aleksander",  "Ibro", [ true, true, false, true, true, false, true ], true ),
+//            Friend( 3, "Carlos",  "Galo" , [ true, true, true, true, true, true, true ], true )]
 //
 //        for friend in friends{
 //            tempUser.addFriend(friend)
 //        }
+//        
+//        // add admins
+//        let admins = [
+//            AdminInfo( 5, "Kristiano", "dicka" ),
+//            AdminInfo( 8, "FirstName", "LastName" )
+//        ]
+//        
+//        for admin in admins{
+//            tempUser.addAdmin( admin )
+//        }
 //
+//        // ste the user 
 //        self.user = tempUser
 //
 //        // Go the next screen

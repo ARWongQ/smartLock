@@ -24,7 +24,7 @@ class AdminTableViewCell: UITableViewCell {
     
     // MARK: UI Functions
     // Updates the cell view
-    func update( with friend: Friend ){
+    func update( with friend: AdminInfo ){
         print("Inside admin")
         fullNameLabel.text = "\(friend.firstName) \(friend.lastName)"
         
