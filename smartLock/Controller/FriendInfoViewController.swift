@@ -302,8 +302,7 @@ class FriendInfoViewController: UIViewController {
     // adds the friend into the Friend database
     func storeFriendInDB(_ friend: Friend ){
         
-        let friendItem : [ String: Any] = [
-                                      "friendFirstName" : friend.firstName,
+        let friendItem : [ String: Any] = ["friendFirstName" : friend.firstName,
                                       "friendLastName" : friend.lastName,
                                       "friendCountInDays" : friend.getComeInDaysStr(),
                                       "friendDoorNotification" : friend.openDoorNotification,
