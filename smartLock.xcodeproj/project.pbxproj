@@ -29,7 +29,8 @@
 		13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552663220166CA00B49139 /* FriendInfoViewController.swift */; };
 		13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */; };
 		13C316112226246F00AE9A9A /* AdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C316102226246F00AE9A9A /* AdminTableViewCell.swift */; };
-		2FD2D920222577F700238496 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */; };
+		2FAFF2D6223FF2500092F3DB /* AZSClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAFF2D5223FF2500092F3DB /* AZSClient.framework */; };
+		2FAFF2D7223FF2640092F3DB /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */; };
 		2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D921222578BC00238496 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D923222578FD00238496 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2FD2D9272225BEEE00238496 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */; };
@@ -65,6 +66,7 @@
 		1D8071309BA7FA2147AE2412 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
 		2E69EBC6DC2452BEE93C3473 /* Pods-smartLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.release.xcconfig"; sourceTree = "<group>"; };
 		2F05A7C2221D855C00A4FC7A /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		2FAFF2D5223FF2500092F3DB /* AZSClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AZSClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FD2D91C222574CF00238496 /* AZSClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AZSClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		2FD2D921222578BC00238496 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -83,9 +85,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FAFF2D7223FF2640092F3DB /* MicrosoftAzureMobile.framework in Frameworks */,
+				2FAFF2D6223FF2500092F3DB /* AZSClient.framework in Frameworks */,
 				2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */,
 				2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */,
-				2FD2D920222577F700238496 /* MicrosoftAzureMobile.framework in Frameworks */,
 				2FD2D9272225BEEE00238496 /* WindowsAzureMessaging.framework in Frameworks */,
 				57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */,
 			);
@@ -202,6 +205,7 @@
 		D4DCBF4CF91DCB05F3D543C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FAFF2D5223FF2500092F3DB /* AZSClient.framework */,
 				2FD2D923222578FD00238496 /* SafariServices.framework */,
 				2FD2D921222578BC00238496 /* WebKit.framework */,
 				2FD2D91C222574CF00238496 /* AZSClient.framework */,
@@ -317,6 +321,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-smartLock/Pods-smartLock-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AZSClient/AZSClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -326,6 +331,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AZSClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",

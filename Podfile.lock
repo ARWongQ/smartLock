@@ -2,12 +2,14 @@ PODS:
   - Alamofire (4.8.1)
   - AlamofireImage (3.5.0):
     - Alamofire (~> 4.8)
+  - AZSClient (0.2.6)
   - SwiftyJSON (4.2.0)
   - TextFieldEffects (1.5.1)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - AZSClient
   - SwiftyJSON
   - TextFieldEffects
 
@@ -15,15 +17,17 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - AZSClient
     - SwiftyJSON
     - TextFieldEffects
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  AZSClient: efd576cabf56f97e38cb1b614739f4b0c1906392
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TextFieldEffects: 7d372f58aeaf9acd9626bbf962680aef926b085d
 
-PODFILE CHECKSUM: 7b750ca5c94d33c1f3b09b7e2708a1d6df918481
+PODFILE CHECKSUM: bc2682c2e664720af667ba78d4f80541a2e7fbd5
 
 COCOAPODS: 1.6.0

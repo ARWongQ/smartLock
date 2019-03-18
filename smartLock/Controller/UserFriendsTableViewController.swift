@@ -9,15 +9,12 @@
 import UIKit
 import Alamofire
 
-<<<<<<< HEAD
+
 class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChangeFriendInfoDelegate {
     
     
-=======
-class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate {
-    
     let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
->>>>>>> old-state
+
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: Delegate Functions
     // Updates a friend from my list of friends
