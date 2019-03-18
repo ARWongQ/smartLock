@@ -305,15 +305,10 @@ class FriendInfoViewController: UIViewController {
             if response.result.isSuccess {
                 // create the user with the DB info
                 print(response.result.value!)
-                
-                
             }else{
                 // SHOW ERROR MESSAGE
-
             }
         }
-        
-        
     }
     
     // Upload a friend image to the VM/Flask server
