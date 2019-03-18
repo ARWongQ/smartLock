@@ -9,9 +9,15 @@
 import UIKit
 import Alamofire
 
+<<<<<<< HEAD
 class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChangeFriendInfoDelegate {
     
     
+=======
+class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate {
+    
+    let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
+>>>>>>> old-state
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: Delegate Functions
     // Updates a friend from my list of friends
@@ -31,7 +37,7 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     // deletes a friend and gives you the index where it was deleted
-    func getFriendIndex( id: Int ) -> Int? {
+    func getFriendIndex( id: String ) -> Int? {
         guard let friends = currentUser?.friends else { return nil }
         for (index, friend) in friends.enumerated()  {
             if( friend.id == id ){
@@ -256,22 +262,50 @@ class UserFriendsTableViewController: UIViewController, UITableViewDelegate, UIT
     // MARK: CLOUD/DB
     
     // delete a friend from the DB
+//    func deleteFriendFromDB( _ friend: Friend) {
+//        let parameters: Parameters = ["infoRequested": "postDeleteFriend",
+//                                      "id": friend.id,
+//                                      "friendImageName" : friend.imageName]
+//        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
+//
+//        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
+//            if response.result.isSuccess {
+//
+//
+//            }else{
+//                // SHOW ERROR MESSAGE
+//
+//            }
+//        }
+//
+//    }
+    
     func deleteFriendFromDB( _ friend: Friend) {
-        let parameters: Parameters = ["infoRequested": "postDeleteFriend",
-                                      "id": friend.id,
-                                      "friendImageName" : friend.imageName]
-        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
-            if response.result.isSuccess {
-                
-                
-            }else{
-                // SHOW ERROR MESSAGE
-                
+        print("Id of friend I am trying to delete: ", friend.id)
+        let azureClient = myAppDelegate.client
+        let table = azureClient.table(withName: "Friend")
+        
+        table.delete(withId: "\(friend.id)") { (friendId, error) in
+            if let err = error {
+                print("ERROR in deletion", err)
+            } else {
+                print("Deleted Friend ID: ", friendId)
             }
         }
         
+        // Alomafire request to delete the picture from the VM local storage
+        let parameters: Parameters = ["infoRequested": "postDeleteFriend", "friendImageName" : friend.imageName]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
+
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
+            if response.result.isSuccess {
+
+            }else{
+                // SHOW ERROR MESSAGE
+
+            }
+        }
     }
 
 

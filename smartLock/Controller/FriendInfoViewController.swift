@@ -42,6 +42,7 @@ class FriendInfoViewController: UIViewController {
     var friend: Friend?
     var currentUserID: Int?
     var tempImage: UIImage =  UIImage(named: "img_placeholder")!
+    let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: App Life Cycle
@@ -166,7 +167,6 @@ class FriendInfoViewController: UIViewController {
         
         // updating edited friend
         if navigationItem.title == "Friend"{
-            // NEED TO USE THE UI information
             guard
                 let id = friend?.id,
                 let myImage = profileImageButton.currentBackgroundImage
@@ -189,7 +189,7 @@ class FriendInfoViewController: UIViewController {
             // Get an unassigned, random friend ID from the database
             let parameters: Parameters = ["infoRequested": "getFriendId", "userId" : currentUserID]
             let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
-            
+
             Alamofire.request(url, method: .get, parameters: parameters).responseString { response in
                 print("MY RESPONSE")
                 print( response.result.value )
@@ -197,17 +197,20 @@ class FriendInfoViewController: UIViewController {
                     // create the user with the DB info
                     let id = Int(response.result.value!)
                     let myImage = self.profileImageButton.currentBackgroundImage!
-                    
-                    let newFriend = Friend( id!, firstN, lastN, comeInDays, openDoorNotification )
+
+                    let newFriend = Friend( "", firstN, lastN, comeInDays, openDoorNotification )
                     newFriend.image = myImage
                     self.delegate?.addNewFriend(with: newFriend )
-                    self.storeFriendInDB(newFriend)
+                    self.storeFriendInDB( newFriend )
                     self.updateImageDB( myImage, newFriend.imageName )
+                    
+
                 }else{
                     // SHOW ERROR MESSAGE
                     print("couldn't get id")
                 }
             }
+
             
             
 
@@ -218,21 +221,35 @@ class FriendInfoViewController: UIViewController {
     
     // delete a friend from the DB
     func updateEditedFriendInDB( _ friend: Friend) {
-        let parameters: Parameters = ["infoRequested": "postDeleteFriend","id": friend.id ]
-        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
+        let azureClient = myAppDelegate.client
+        let table = azureClient.table(withName: "Friend")
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
-            if response.result.isSuccess {
-                self.storeFriendInDB(friend)
-                
-            }else{
-                // SHOW ERROR MESSAGE
-                print("Upating friend in DB did not work")
-                
+        let newFriendItem : [ String: Any] = [
+            "id" : friend.id,
+            "friendFirstName" : friend.firstName,
+            "friendLastName" : friend.lastName,
+            "friendCountInDays" : friend.getComeInDaysStr(),
+            "friendDoorNotification" : friend.openDoorNotification,
+            "friendImage" : friend.imageName,
+            "userId" : currentUserID! ]
+        
+        table.update(newFriendItem) { (result, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else if let item = result {
+                print("Successfully updated friend")
             }
         }
         
+//        table.delete(withId: "\(friend.id)") { (itemId, error) in
+//            if let err = error {
+//                print("ERROR ", err)
+//            } else {
+//                self.storeFriendInDB( friend )
+//            }
+//        }
     }
+    
     func getComeInDays() -> [Bool] {
         // set the buttons
         let allButtons = [ sundayButton, mondayButton, tuesdayButton, wednesdayButton, thursdayButton, fridayButton, saturdayButton ]
@@ -268,52 +285,39 @@ class FriendInfoViewController: UIViewController {
     
     // delete a friend from the DB
     func deleteFriendFromDB( _ friend: Friend) {
-        let parameters: Parameters = ["infoRequested": "postDeleteFriend","id": friend.id ]
-        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
+
+        let azureClient = myAppDelegate.client
+        let table = azureClient.table(withName: "Friend")
         
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
-            if response.result.isSuccess {
-                
-                
-            }else{
-                // SHOW ERROR MESSAGE
-                
+        table.delete(withId: "\(friend.id)") { (friendId, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else {
+                print("Deleted Friend ID: ", friendId)
             }
         }
-        
     }
-    // adds the friend into the SQL database
+
+    // adds the friend into the Friend database
     func storeFriendInDB(_ friend: Friend ){
         
-        let parameters: Parameters = ["infoRequested": "postFriendToDB",
-                                      "friendToAdd" :
-                                        ["id" : friend.id,
-                                         "firstName" : friend.firstName,
-                                         "lastName" : friend.lastName,
-                                         "comeInDays" : friend.comeInDays,
-                                         "doorNotification" : friend.openDoorNotification,
-                                         "imageName" : friend.imageName,
-                                         "belongsToUserId" : currentUserID!] ]
+        let friendItem : [ String: Any] = ["friendFirstName" : friend.firstName,
+                                      "friendLastName" : friend.lastName,
+                                      "friendCountInDays" : friend.getComeInDaysStr(),
+                                      "friendDoorNotification" : friend.openDoorNotification,
+                                      "friendImage" : friend.imageName,
+                                      "userId" : currentUserID! ]
         
-        
-        
-        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
-        
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
-            print("My response")
-            print( response )
-            if response.result.isSuccess {
-                // create the user with the DB info
-                print(response.result.value!)
-                
-                
-            }else{
-                // SHOW ERROR MESSAGE
-
+        let azureClient = myAppDelegate.client
+        let itemTable = azureClient.table(withName: "Friend")
+        itemTable.insert(friendItem) {
+            (insertedItem, error) in
+            if (error != nil) {
+                print("Error" + error.debugDescription);
+            } else {
+                print("Friend inserted")
             }
         }
-        
-        
     }
     
     // Upload a friend image to the VM/Flask server
@@ -337,56 +341,9 @@ class FriendInfoViewController: UIViewController {
                 }
             case .failure( let encodingError):
                 print(encodingError)
-
             }
-        } )
-
+        })
     }
-    
-//
-//
-//    func uploadImageToFirebase(_ image: UIImage, _ imageName: String){
-//        print("Uploading image to Firebase")
-//
-//        guard let data = image.jpegData(compressionQuality: 1) else { return }
-//        let storageRef = Storage.storage().reference().child(imageName)
-//        storageRef.putData(data, metadata: nil, completion:
-//            { (metadata, error) in
-//
-//                if error != nil {
-//                    print("Error in Firebase", error)
-//                    return
-//                }
-//                self.fromFirebaseToVM(imageName)
-//                print(metadata)
-//
-//        })
-//
-//    }
-//
-//    func fromFirebaseToVM(_ imageName: String){
-//        print("we are gettting \(imageName) from firebase")
-//        print("Storing to VM")
-//
-//        let parameters: Parameters = ["friendImageName": imageName]
-//        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/getImageFromFirebase"
-//
-//        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-//            print("MY RESPONSE")
-//            print( response )
-//            if response.result.isSuccess {
-//
-//                print("Success")
-//
-//            }else{
-//                // SHOW ERROR MESSAGE
-//                print("Failure")
-//
-//            }
-//        }
-//
-//
-//    }
 }
 
 extension FriendInfoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

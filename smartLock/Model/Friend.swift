@@ -12,7 +12,7 @@ import UIKit
 class Friend: CustomStringConvertible, Comparable {
     
     
-    let id: Int
+    let id: String
     var firstName: String
     var lastName: String
     var imageName: String
@@ -21,13 +21,13 @@ class Friend: CustomStringConvertible, Comparable {
     var openDoorNotification: Bool
     
     
-    init( _ _id: Int, _ _firstName: String, _ _lastName: String, _ _comeInDays: [Bool], _ _openDoorNotification: Bool ){
+    init( _ _id: String, _ _firstName: String, _ _lastName: String, _ _comeInDays: [Bool], _ _openDoorNotification: Bool ){
         // Set all properties
         id = _id
         firstName = _firstName
         lastName = _lastName
         image = UIImage(named: "img_placeholder")!
-        imageName = "\(id)_\(firstName)_\(lastName).jpeg"
+        imageName = "\(firstName)_\(lastName).jpeg"
         comeInDays = _comeInDays
         openDoorNotification = _openDoorNotification
 
@@ -36,6 +36,19 @@ class Friend: CustomStringConvertible, Comparable {
     // displays Friend's information
     var description: String{
         return "Friend( _id: \(id), _firstName: \(firstName), _lastName: \(lastName), _image:UNKNOWN, comeInDays: \(comeInDays) , openDoorNotification: \(openDoorNotification) ) "
+    }
+    
+    func getComeInDaysStr() -> String {
+        var answer = ""
+        for i in comeInDays {
+            if i {
+                answer += "T"
+            }else{
+                answer += "F"
+            }
+        }
+        
+        return answer
     }
     
     //allows sorting based on first name
