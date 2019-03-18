@@ -17,6 +17,7 @@ class User {
     var fullName: String
     var email: String
     var password: String
+    var admins: [AdminInfo]
     var friends: [Friend]
     var devices: [Device]
     
@@ -28,6 +29,7 @@ class User {
         fullName = "\(_firstName) \(_lastName)"
         email = _email
         password = _password
+        admins = []
         friends = []
         devices = []
     }
@@ -55,6 +57,10 @@ class User {
     
     func addFriend( _ friend: Friend ){
         friends.append( friend )
+    }
+    
+    func addAdmin( _ admin: AdminInfo ){
+        admins.append( admin )
     }
     
 }

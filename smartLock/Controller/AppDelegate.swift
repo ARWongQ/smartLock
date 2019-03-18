@@ -28,13 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 /**************************************** DO NOT REMOVE, we need it for testing *************************************************/
         /* Look this for adding an item to Azure SQL database */
-        /* TODO: find out if I need easy Tables at all */
-//        // Testing adding a user
+//         TODO: find out if I need easy Tables at all
+        // Testing adding a user
 //        let delegate = UIApplication.shared.delegate as! AppDelegate
 //        let client = delegate.client
 //        // id needs to be lowercase and a String
 //        let user = ["id": "1", "firstName":"Aleksander", "lastName":"Ibro", "email":"aibro@wpi.edu",
-//                    "userPassword":"123456", "userImage":"1_Aleksander_Ibro.jpeg"]
+//                    "userPassword":"123456", "userImage":"Aleksander_Ibro.jpeg"]
 //        let itemTable = client.table(withName: "App_User")
 //        //client.getTable("App_User").insert(item)
 //        itemTable.insert(user) {
@@ -45,6 +45,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Item inserted, id: ", insertedItem!["id"]!)
 //            }
 //        }
+//
+//        let user2 = ["id": "2", "firstName":"Kristiano", "lastName":"Bejko", "email":"kbejko@wpi.edu",
+//                    "userPassword":"123456", "userImage":"Kristiano_Bejko.jpeg"]
+//        let itemTable2 = client.table(withName: "App_User")
+//        //client.getTable("App_User").insert(item)
+//        itemTable2.insert(user2) {
+//            (insertedItem, error) in
+//            if (error != nil) {
+//                print("Error" + error.debugDescription);
+//            } else {
+//                print("Item inserted, id: ", insertedItem!["id"]!)
+//            }
+//        }
+        
+        
+
 //        // Testing adding a friend
 //        let delegate = UIApplication.shared.delegate as! AppDelegate
 //        let client = delegate.client
@@ -60,6 +76,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Item inserted, id: ", insertedItem!["id"]!)
 //            }
 //        }
+        
+        // testing adding to App_User_Added
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let client = delegate.client
+//        let admin = ["addedUserId" : "2", "addingUserId" : "1"]
+//        let itemTable3 = client.table(withName: "App_User_Added")
+//        //client.getTable("App_User").insert(item)
+//        itemTable3.insert(admin) {
+//            (insertedItem, error) in
+//            if (error != nil) {
+//                print("Error" + error.debugDescription);
+//            } else {
+//                print("Admin inserted ")
+//            }
+//        }
+        
 /**************************************** DO NOT REMOVE, we need it for testing *************************************************/
 
 

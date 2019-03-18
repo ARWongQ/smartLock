@@ -65,18 +65,30 @@ class MainViewController: UIViewController {
         
         
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-        // Only for testing
-        // for now we are just creating our own user
+//        // Only for testing
+//        // for now we are just creating our own user
 //        let tempUser = User(1, "Augusto", "Wong", "arwong@wpi.edu", "123456")
+//        // add friends
 //        let friends = [
-//            Friend( 1, "Mario", "Zyla", UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
-//            Friend( 2, "Aleksander",  "Ibro", UIImage(named: "testImage.png")!, [ true, true, false, true, true, false, true ], true ),
-//            Friend( 3, "Carlos",  "Galo" , UIImage(named: "testImage.png")!, [ true, true, true, true, true, true, true ], true )]
+//            Friend( 1, "Mario", "Zyla", [ true, true, false, true, true, false, true ], true ),
+//            Friend( 2, "Aleksander",  "Ibro", [ true, true, false, true, true, false, true ], true ),
+//            Friend( 3, "Carlos",  "Galo" , [ true, true, true, true, true, true, true ], true )]
 //
 //        for friend in friends{
 //            tempUser.addFriend(friend)
 //        }
+//        
+//        // add admins
+//        let admins = [
+//            AdminInfo( 5, "Kristiano", "dicka" ),
+//            AdminInfo( 8, "FirstName", "LastName" )
+//        ]
+//        
+//        for admin in admins{
+//            tempUser.addAdmin( admin )
+//        }
 //
+//        // ste the user 
 //        self.user = tempUser
 //
 //        // Go the next screen
@@ -128,6 +140,7 @@ class MainViewController: UIViewController {
         let myEmail = "aibro@wpi.edu"
         let myPassword = "123456"
         /*******************************************************/
+        
         let azureClient = myAppDelegate.client
         let appUserTable = azureClient.table(withName: "App_User")
         // Create a predicate that finds users with the given user name and password
@@ -137,7 +150,7 @@ class MainViewController: UIViewController {
                 print("ERROR ", err)
             } else if let users = result?.items {
                 // users contains all users with matching predicate (only 1)
-                let userId = (users[0]["id"] as! NSString).intValue
+                let userId = users[0]["id"] as! Int
                 // Getting user's friends
                 let friendTable = azureClient.table(withName: "Friend")
                 predicate = NSPredicate(format: "userId = %d", userId)
@@ -146,11 +159,40 @@ class MainViewController: UIViewController {
                     if let err = error {
                         print("Error reading friends ", err)
                     } else if let friends = result?.items {
-                        // create the user with friends
-                        self.user = self.createUser(user: users[0], friends: friends)
-
-                        // move to the next screen
-                        self.performSegue(withIdentifier: "mainToUserMain", sender: self)
+                        print("friends", friends)
+                        // Getting user's admin friends (i.e. real users in the db)
+                        let addedUserTable = azureClient.table(withName: "App_User_Added")
+                        predicate = NSPredicate(format: "addingUserId = %d", userId)
+                        
+                        addedUserTable.read(with: predicate) { (result, error) in
+                            if let err = error {
+                                print("Error reading addedUserTable ", err)
+                            } else if let adminIds = result?.items {
+                                // need to get info for all these adminIds
+                                print("admin ids", adminIds)
+                                var admins : [[AnyHashable : Any]] = []
+                                for adminId in adminIds {
+                                    print("adminid", adminId)
+                                    predicate = NSPredicate(format: "id = %d", (adminId["addedUserId"] as! NSString).intValue)
+                                    appUserTable.read(with : predicate) { (result, error) in
+                                        if let err = error {
+                                            print("Error getting admins ", err)
+                                        } else if var theseAdmins = result?.items {
+                                            let thisAdmin = theseAdmins[0]
+                                            print("thisAdmin", thisAdmin)
+                                            admins.append(thisAdmin)
+                                        }
+                                        print("RIGHT BEFORE CREATING USER")
+                                        print("friends", friends)
+                                        print("admins", admins)
+                                        // create the user with friends and admins
+                                        self.user = self.createUser(user: users[0], friends: friends, admins: admins)
+                                        // move to the next screen
+                                        self.performSegue(withIdentifier: "mainToUserMain", sender: self)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -160,9 +202,10 @@ class MainViewController: UIViewController {
     
     
     //Creates a user
-    func createUser( user: [AnyHashable : Any], friends: [[AnyHashable : Any]] ) -> User {
+    func createUser( user: [AnyHashable : Any], friends: [[AnyHashable : Any]], admins: [[AnyHashable : Any]]) -> User {
+        print("CREATING USER")
         // Create the user
-        let id = (user["id"] as! NSString).intValue
+        let id = user["id"] as! Int
         let firstN = user["firstName"] as! String
         let lastN = user["lastName"] as! String
         let email = user["email"] as! String
@@ -192,6 +235,19 @@ class MainViewController: UIViewController {
             setImageFromDB( curFriend )
             myUser.addFriend( curFriend )
         }
+        
+        for admin in admins {
+            print("Admin", admin)
+            let id = admin["id"] as! Int
+            print("Id of admin I am trying to add", id)
+            
+            let firstN = admin["firstName"] as! String
+            let lastN = admin["lastName"] as! String
+            let thisAdmin = AdminInfo(id, firstN, lastN)
+            setImageFromDB(thisAdmin)
+            myUser.addAdmin(thisAdmin)
+            
+        }
         return myUser
     }
     
@@ -209,6 +265,25 @@ class MainViewController: UIViewController {
                 // set temp image
                 print("No image received for this friend")
                 friend.image = UIImage(named: "img_placeholder")!
+                
+            }
+        }
+    }
+    
+    // get the image from the Db for a requested admin
+    func setImageFromDB( _ admin: AdminInfo){
+        print("Getting picture ", admin.imageName)
+        let parameters: Parameters = ["friendImageName": admin.imageName ]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/getFriendImage"
+        Alamofire.request(url, method: .get, parameters: parameters).responseImage { response in
+            if response.result.isSuccess {
+                // show the image from the DB
+                print("SETTING IMAGE OF ADMIN")
+                admin.image = response.result.value!
+            }else{
+                // set temp image
+                print("No image received for this admin")
+                admin.image = UIImage(named: "img_placeholder")!
                 
             }
         }
