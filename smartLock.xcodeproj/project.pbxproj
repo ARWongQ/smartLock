@@ -29,7 +29,6 @@
 		13552664220166CA00B49139 /* FriendInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13552663220166CA00B49139 /* FriendInfoViewController.swift */; };
 		13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5E6D521AE0E4C00B62CD4 /* SignUpViewController.swift */; };
 		13C316112226246F00AE9A9A /* AdminTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C316102226246F00AE9A9A /* AdminTableViewCell.swift */; };
-		2FAFF2D6223FF2500092F3DB /* AZSClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FAFF2D5223FF2500092F3DB /* AZSClient.framework */; };
 		2FAFF2D7223FF2640092F3DB /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D91F222577F700238496 /* MicrosoftAzureMobile.framework */; };
 		2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D921222578BC00238496 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D923222578FD00238496 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -86,7 +85,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FAFF2D7223FF2640092F3DB /* MicrosoftAzureMobile.framework in Frameworks */,
-				2FAFF2D6223FF2500092F3DB /* AZSClient.framework in Frameworks */,
 				2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */,
 				2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */,
 				2FD2D9272225BEEE00238496 /* WindowsAzureMessaging.framework in Frameworks */,
