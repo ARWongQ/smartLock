@@ -9,6 +9,7 @@
 import UIKit
 import UserNotificationsUI
 import UserNotifications
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -109,6 +110,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Azure Notification Hub */
         application.registerForRemoteNotifications()
+        
+        /* Firebase configuration for sign-in/sign-up */
+        FirebaseApp.configure()
+//        let authUI = FUIAuth.defaultAuthUI()
+//        // You need to adopt a FUIAuthDelegate protocol to receive callback
+//        authUI.delegate = self
+//        let providers: [FUIAuthProvider] = [
+//            FUIGoogleAuth(),
+////            FUIFacebookAuth(),
+////            FUITwitterAuth(),
+////            FUIPhoneAuth(authUI:FUIAuth.defaultAuthUI()),
+//            ]
+//        self.authUI.providers = providers
 
         return true
     }

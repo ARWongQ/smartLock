@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import TextFieldEffects
+import Alamofire
+import Firebase
 
 class SignUpViewController: UIViewController {
     ///////////////////////////////////////////////////////////////////////////////
@@ -19,8 +21,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: HoshiTextField!
     @IBOutlet weak var emailTextField: HoshiTextField!
     @IBOutlet weak var passwordTextField: HoshiTextField!
+    @IBOutlet weak var confirmPasswordTextField: HoshiTextField!
     @IBOutlet weak var submitButton: UIBarButtonItem!
     
+    let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // Mark: App Life Cycles
     override func viewDidLoad() {
@@ -44,10 +48,22 @@ class SignUpViewController: UIViewController {
     
     // Submit new user information and go to user main screen
     @IBAction func submitButtonPressed(_ sender: Any) {
-        let valid = checkAllFilledData()
+        let valid = checkAllFilledData() //also checks if password = confirm Password fields
         if( valid == true ){
-            // Moving to next screen
-            performSegue(withIdentifier: "signUpToCheckEmail", sender: self )
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { authResult, error in
+                if let err = error {
+                    print("cannot create user ", err)
+                } else {
+                    print("user PROBABLY created")
+                    /* Since we created the user in Firebase, we need to add the user's info in the
+                       actual Azure DB. Note that we do this even though the user hasn't verified
+                       the email they provided yet. That is fine, since the app won't let the user
+                       log in if email is unverified */
+                    self.storeUserInAzureDB(self.firstNameTextField.text!, self.lastNameTextField.text!, self.emailTextField.text!, "123456")
+                    // Moving to next screen
+                    self.performSegue(withIdentifier: "signUpToCheckEmail", sender: self )
+                }
+            }
         }else{
             // Present a pop up 
             let alert = UIAlertController(title: "Error", message: "Please fill all required information", preferredStyle: .alert)
@@ -82,7 +98,12 @@ class SignUpViewController: UIViewController {
         var isValid : [Bool] = []
         let allTextField = [ firstNameTextField, lastNameTextField, emailTextField, passwordTextField ]
         
-        // this way it wont optimize whenever we get one false
+        if (passwordTextField.text != confirmPasswordTextField.text) {
+            //TODO: Add a label that tells the user fields are not the same
+            print("SIGN UP: Password not the same as confirm password")
+            return false;
+        }
+        // this way it wont optimize whenever we get one false ?? - are these comments just for you bud
         for textF in allTextField{
             isValid.append( checkValidTextField( textF! ) )
         }
@@ -117,6 +138,39 @@ class SignUpViewController: UIViewController {
         textField.borderActiveColor = myBlue
         textField.animateViewsForTextEntry()
         
+    }
+    
+    // Stores the user in Azure SQL DB (with no picture)
+    func storeUserInAzureDB(_ firstName: String, _ lastName: String, _ email: String, _ password: String) {
+        
+        let client = myAppDelegate.client
+        // get a random available id from Flask Server
+        let parameters: Parameters = ["infoRequested": "getFriendId", "userId" : "1"]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseString { response in
+            print("SIGN UP: response value", response.result.value)
+            if response.result.isSuccess {
+                // create the user with the DB info
+                let id = response.result.value!
+                // id needs to be lowercase and a String
+                let user = ["id": id, "firstName": firstName, "lastName": lastName, "email": email,
+                            "userPassword": password, "userImage":"\(firstName)_\(lastName)"]
+                let itemTable = client.table(withName: "App_User")
+                //client.getTable("App_User").insert(item)
+                itemTable.insert(user) {
+                    (insertedItem, error) in
+                    if (error != nil) {
+                        print("Error" + error.debugDescription);
+                    } else {
+                        print("Item inserted, id: ", insertedItem!["id"]!)
+                    }
+                }
+            } else {
+                // SHOW ERROR MESSAGE
+                print("couldn't get id")
+            }
+        }
     }
     
     ///////////////////////////////////////////////////////////////////////////////

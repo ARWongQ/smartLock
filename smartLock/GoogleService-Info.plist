@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>472519431038-3pa6niuc510ve0dqmln2tqiu4mgmla3l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.472519431038-3pa6niuc510ve0dqmln2tqiu4mgmla3l</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDqtvhhc7ekOkl-ggMGBfLw29RDdMmJWpc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>472519431038</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.WPI.smartLockFive</string>
+	<key>PROJECT_ID</key>
+	<string>smartlock-8785b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>smartlock-8785b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:472519431038:ios:95df52c9d049e30a</string>
+	<key>DATABASE_URL</key>
+	<string>https://smartlock-8785b.firebaseio.com</string>
+</dict>
+</plist>

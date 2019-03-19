@@ -10,6 +10,7 @@ import UIKit
 import TextFieldEffects
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 class MainViewController: UIViewController {
 
@@ -137,14 +138,27 @@ class MainViewController: UIViewController {
     func getUserAuthenticationFromDB( _ email: String, _ password: String ){
         
         /********* USER DOES NOT SIGN IN FOR THE MOMENT ********/
-        let myEmail = "aibro@wpi.edu"
-        let myPassword = "123456"
+//        let myEmail = "aibro@wpi.edu"
+//        let myPassword = "123456"
         /*******************************************************/
         
+        /* Azure Client for SQL DB access */
         let azureClient = myAppDelegate.client
+        /* Azure Firebase authentication for filled in email and password */
+        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] user, error in
+            guard let strongSelf = self else {
+                print("SIGN IN: Could not sign user ", error)
+                return
+            }
+        }
+        
+        /*************** Gets the user from Azure SQL DB and creates a local User object **********************************/
+        /*************** We fill in the user object with its picture from Cloud VM local storage **************************/
+        /*************** And list of normal friends and a list of admins **************************************************/
+        
         let appUserTable = azureClient.table(withName: "App_User")
         // Create a predicate that finds users with the given user name and password
-        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", myEmail, myPassword)
+        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", emailTextField.text!, passwordTextField.text!)
         appUserTable.read(with : predicate) { (result, error) in
             if let err = error {
                 print("ERROR ", err)
@@ -197,6 +211,7 @@ class MainViewController: UIViewController {
                 }
             }
         }
+        /******************************************************************************************************************/
     }
     
     

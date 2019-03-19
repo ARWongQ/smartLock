@@ -3,6 +3,23 @@ PODS:
   - AlamofireImage (3.5.0):
     - Alamofire (~> 4.8)
   - AZSClient (0.2.6)
+  - Firebase/Auth (5.16.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (= 5.3.0)
+  - Firebase/CoreOnly (5.16.0):
+    - FirebaseCore (= 5.2.0)
+  - FirebaseAuth (5.3.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.2.0):
+    - GoogleUtilities/Logger (~> 5.2)
+  - GoogleUtilities/Environment (5.3.7)
+  - GoogleUtilities/Logger (5.3.7):
+    - GoogleUtilities/Environment
+  - GTMSessionFetcher/Core (1.2.1)
   - SwiftyJSON (4.2.0)
   - TextFieldEffects (1.5.1)
 
@@ -10,6 +27,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - AZSClient
+  - Firebase/Auth
   - SwiftyJSON
   - TextFieldEffects
 
@@ -18,6 +36,12 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - AZSClient
+    - Firebase
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - GoogleUtilities
+    - GTMSessionFetcher
     - SwiftyJSON
     - TextFieldEffects
 
@@ -25,9 +49,15 @@ SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
   AZSClient: efd576cabf56f97e38cb1b614739f4b0c1906392
+  Firebase: 749a8ff4962f9d8c79dda1966de20f6f77583d67
+  FirebaseAuth: c9b3ff063c223d2841d97240af547ce511bce19a
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: ea2d1816723ef21492b8e9113303e1350db5e08c
+  GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TextFieldEffects: 7d372f58aeaf9acd9626bbf962680aef926b085d
 
-PODFILE CHECKSUM: bc2682c2e664720af667ba78d4f80541a2e7fbd5
+PODFILE CHECKSUM: 294d6d06cd4f43a71cac10598e00abf45b283cae
 
 COCOAPODS: 1.6.0
