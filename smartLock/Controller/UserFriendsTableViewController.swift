@@ -9,11 +9,13 @@
 import UIKit
 import Alamofire
 
-class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate {
+class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDelegate, ChangeAdminInfoDelegate {
     
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: Delegate Functions
+    
+    // ChangeFriendInfoDelegate Functions
     // Updates a friend from my list of friends
     func updateFriend( with friend: Friend ){
 
@@ -40,6 +42,12 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         }
         return nil
     }
+    
+    // ChangeAdminInfoDelegate Functions
+    func addNewAdmin( with admin: AdminInfo ){
+        currentUser?.admins.append( admin )
+    }
+    
     
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: Structs
@@ -81,8 +89,6 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         self.navigationController?.navigationBar.titleTextAttributes =
             [ NSAttributedString.Key.foregroundColor: UIColor.white ]
         
-        
-        
 
     }
     
@@ -102,7 +108,6 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         // update the view
         tableView.reloadData()
 
-        
     }
     
     ///////////////////////////////////////////////////////////////////////////////
@@ -120,7 +125,11 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         
         // create actions
         let cancelAction = UIAlertAction( title: "Cancel", style: .cancel, handler: nil )
-        let adminAction = UIAlertAction( title: "Admin", style: .default, handler: nil )
+        let adminAction = UIAlertAction( title: "Admin", style: .default, handler: { action in
+          //proper view
+            self.performSegue( withIdentifier: "addAdmin", sender: self )
+            
+        })
         let friendAction = UIAlertAction( title: "Friend", style: .default, handler: { action in
             // proper view
             self.performSegue(withIdentifier: "addFriend", sender: self )
@@ -270,6 +279,13 @@ class UserFriendsTableViewController: UITableViewController, ChangeFriendInfoDel
         else if segue.identifier == "addFriend" {
             let destinationVC = segue.destination as! UINavigationController
             let nextViewController = destinationVC.viewControllers[0] as! FriendInfoViewController
+            nextViewController.delegate = self
+            nextViewController.currentUserID = currentUser.id
+        }
+        
+        else if segue.identifier == "addAdmin" {
+            let destinationVC = segue.destination as! UINavigationController
+            let nextViewController = destinationVC.viewControllers[0] as! addAdminViewController
             nextViewController.delegate = self
             nextViewController.currentUserID = currentUser.id
         }
