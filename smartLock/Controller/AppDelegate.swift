@@ -123,7 +123,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ////            FUIPhoneAuth(authUI:FUIAuth.defaultAuthUI()),
 //            ]
 //        self.authUI.providers = providers
-
         return true
     }
 

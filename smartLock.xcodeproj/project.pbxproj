@@ -15,6 +15,7 @@
 		132E417021EEE832007CB660 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132E416D21EEE832007CB660 /* UserSettingsViewController.swift */; };
 		132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132E416E21EEE832007CB660 /* UserHistoryViewController.swift */; };
 		132E417321EEE85C007CB660 /* UserTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132E417221EEE85C007CB660 /* UserTabBarController.swift */; };
+		132FE97D22405EED000BD966 /* addAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE97C22405EED000BD966 /* addAdminViewController.swift */; };
 		133B56AF21ADE87F00DCF0F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133B56AE21ADE87F00DCF0F9 /* AppDelegate.swift */; };
 		133B56B121ADE87F00DCF0F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133B56B021ADE87F00DCF0F9 /* MainViewController.swift */; };
 		133B56B421ADE87F00DCF0F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 133B56B221ADE87F00DCF0F9 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		132E416D21EEE832007CB660 /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
 		132E416E21EEE832007CB660 /* UserHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHistoryViewController.swift; sourceTree = "<group>"; };
 		132E417221EEE85C007CB660 /* UserTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTabBarController.swift; sourceTree = "<group>"; };
+		132FE97C22405EED000BD966 /* addAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAdminViewController.swift; sourceTree = "<group>"; };
 		133B56AB21ADE87F00DCF0F9 /* smartLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133B56AE21ADE87F00DCF0F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		133B56B021ADE87F00DCF0F9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 		133B56C221ADE8A500DCF0F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				132FE97C22405EED000BD966 /* addAdminViewController.swift */,
 				132E417221EEE85C007CB660 /* UserTabBarController.swift */,
 				13552663220166CA00B49139 /* FriendInfoViewController.swift */,
 				1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */,
@@ -363,6 +366,7 @@
 				132DF7602206570E00AA10CC /* Device.swift in Sources */,
 				13B5E6D621AE0E4C00B62CD4 /* SignUpViewController.swift in Sources */,
 				1323647A21F697600027E2C7 /* UserAccountEditingViewController.swift in Sources */,
+				132FE97D22405EED000BD966 /* addAdminViewController.swift in Sources */,
 				1346CD372235EFC400134FB8 /* AdminInfo.swift in Sources */,
 				1355265C2201220E00B49139 /* UserFriendsTableViewController.swift in Sources */,
 				133C73E321B7330800B65C95 /* UserMainViewController.swift in Sources */,

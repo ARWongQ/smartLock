@@ -184,8 +184,6 @@ class FriendInfoViewController: UIViewController {
         
         // Adding new friend
         }else{
-            // testing purposes
-          //  let id = 4
             // Get an unassigned, random friend ID from the database
             let parameters: Parameters = ["infoRequested": "getFriendId", "userId" : currentUserID]
             let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/sqlQuery"

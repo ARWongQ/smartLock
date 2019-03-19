@@ -62,36 +62,36 @@ class MainViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         let email = emailTextField.text!
         let password = passwordTextField.text!
+        
         self.getUserAuthenticationFromDB( email, password )
         
         
         /////////////////////////////////////////////////////////////////////////////////////////////////////
-//        // Only for testing
-//        // for now we are just creating our own user
+        // Only for testing
+        // for now we are just creating our own user
 //        let tempUser = User(1, "Augusto", "Wong", "arwong@wpi.edu", "123456")
 //        // add friends
 //        let friends = [
-//            Friend( 1, "Mario", "Zyla", [ true, true, false, true, true, false, true ], true ),
+//            Friend( "1", "Mario", "Zyla", [ true, true, false, true, true, false, true ], true ),
 //            Friend( 2, "Aleksander",  "Ibro", [ true, true, false, true, true, false, true ], true ),
 //            Friend( 3, "Carlos",  "Galo" , [ true, true, true, true, true, true, true ], true )]
 //
 //        for friend in friends{
 //            tempUser.addFriend(friend)
 //        }
-//        
+//
 //        // add admins
 //        let admins = [
 //            AdminInfo( 5, "Kristiano", "dicka" ),
-//            AdminInfo( 8, "FirstName", "LastName" )
 //        ]
-//        
+//
 //        for admin in admins{
 //            tempUser.addAdmin( admin )
 //        }
 //
-//        // ste the user 
+//        // ste the user
 //        self.user = tempUser
-//
+
 //        // Go the next screen
 //        self.performSegue(withIdentifier: "mainToUserMain", sender: self )
 
@@ -145,11 +145,23 @@ class MainViewController: UIViewController {
         /* Azure Client for SQL DB access */
         let azureClient = myAppDelegate.client
         /* Azure Firebase authentication for filled in email and password */
-        Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] user, error in
-            guard let strongSelf = self else {
-                print("SIGN IN: Could not sign user ", error)
-                return
+        // get email from Firebase
+        
+        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", emailTextField.text!, passwordTextField.text!)
+        let user = Auth.auth().currentUser
+        if (user == nil) {
+            print("user is not logged in")
+            Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] user, error in
+                if let strongSelf = self {
+                    print("SIGN IN: ", strongSelf)
+                } else {
+                    print("SIGN IN: Could not sign user ", error)
+                    return
+                }
             }
+        } else {
+            print("user is logged in")
+            predicate = NSPredicate(format: "email = %@", user!.email!)
         }
         
         /*************** Gets the user from Azure SQL DB and creates a local User object **********************************/
@@ -158,12 +170,13 @@ class MainViewController: UIViewController {
         
         let appUserTable = azureClient.table(withName: "App_User")
         // Create a predicate that finds users with the given user name and password
-        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", emailTextField.text!, passwordTextField.text!)
+//        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", emailTextField.text!, passwordTextField.text!)
         appUserTable.read(with : predicate) { (result, error) in
             if let err = error {
                 print("ERROR ", err)
             } else if let users = result?.items {
                 // users contains all users with matching predicate (only 1)
+                print("users read from db that should be logged in ", users)
                 let userId = users[0]["id"] as! Int
                 // Getting user's friends
                 let friendTable = azureClient.table(withName: "Friend")
@@ -195,14 +208,16 @@ class MainViewController: UIViewController {
                                             let thisAdmin = theseAdmins[0]
                                             print("thisAdmin", thisAdmin)
                                             admins.append(thisAdmin)
+                                            if (admins.count == adminIds.count) {
+                                                print("RIGHT BEFORE CREATING USER")
+                                                print("friends", friends)
+                                                print("admins", admins)
+                                                // create the user with friends and admins
+                                                self.user = self.createUser(user: users[0], friends: friends, admins: admins)
+                                                // move to the next screen
+                                                self.performSegue(withIdentifier: "mainToUserMain", sender: self)
+                                            }
                                         }
-                                        print("RIGHT BEFORE CREATING USER")
-                                        print("friends", friends)
-                                        print("admins", admins)
-                                        // create the user with friends and admins
-                                        self.user = self.createUser(user: users[0], friends: friends, admins: admins)
-                                        // move to the next screen
-                                        self.performSegue(withIdentifier: "mainToUserMain", sender: self)
                                     }
                                 }
                             }
@@ -211,8 +226,8 @@ class MainViewController: UIViewController {
                 }
             }
         }
-        /******************************************************************************************************************/
     }
+        /******************************************************************************************************************/
     
     
     
@@ -263,6 +278,7 @@ class MainViewController: UIViewController {
             myUser.addAdmin(thisAdmin)
             
         }
+        print("In create user: user id ", myUser.id, "friends ", myUser.friends, "admins ", myUser.admins)
         return myUser
     }
     
