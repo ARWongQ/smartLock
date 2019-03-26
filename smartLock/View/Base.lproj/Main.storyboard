@@ -239,62 +239,6 @@
                                     <action selector="textEditingChanged:" destination="WJp-bk-470" eventType="editingChanged" id="BKn-hi-Hmv"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2O-xD-HhX" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="293" width="343" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.14901960780000001" green="0.66274509800000003" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.1472501457" green="0.66138988730000003" blue="0.91812950370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.1472501457" green="0.66138988730000003" blue="0.91812950370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="0.69999999999999996"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.1472501457" green="0.66138988730000003" blue="0.91812950370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="textEditingChanged:" destination="WJp-bk-470" eventType="editingChanged" id="bay-6W-jri"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P8Q-AR-QOg" customClass="HoshiTextField" customModule="TextFieldEffects">
-                                <rect key="frame" x="16" y="293" width="343" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.14901960780000001" green="0.66274509800000003" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.1472501457" green="0.66138988730000003" blue="0.91812950370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
-                                        <color key="value" red="0.1472501457" green="0.66138988730000003" blue="0.91812950370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderFontScale">
-                                        <real key="value" value="0.69999999999999996"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderInactiveColor">
-                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderActiveColor">
-                                        <color key="value" red="0.1472501457" green="0.66138988730000003" blue="0.91812950370000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="textEditingChanged:" destination="WJp-bk-470" eventType="editingChanged" id="vvT-8c-gpc"/>
-                                </connections>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fas-sQ-XBj" customClass="HoshiTextField" customModule="TextFieldEffects">
                                 <rect key="frame" x="16" y="293" width="343" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1514,13 +1458,12 @@
         <!--History-->
         <scene sceneID="9zq-pX-WhY">
             <objects>
-                <viewController id="y2V-J3-AfQ" customClass="UserHistoryViewController" customModule="smartLock" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Yla-bc-vLj">
+                <viewController id="y2V-J3-AfQ" customClass="UserHistoryTableViewController" customModule="smartLock" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pgo-xE-7HF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="FFO-W9-y4o"/>
-                    </view>
+                    </tableView>
                     <navigationItem key="navigationItem" title="History" id="ZJX-Bx-B0s"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUy-Z5-lAt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1659,7 +1602,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="y2V-J3-AfQ" kind="relationship" relationship="rootViewController" id="F6O-re-xxm"/>
+                        <segue destination="Ghd-J3-NAb" kind="relationship" relationship="rootViewController" id="EUG-qY-jkL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqW-hU-aHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1719,9 +1662,28 @@
             </objects>
             <point key="canvasLocation" x="2616.8000000000002" y="3000.7389162561576"/>
         </scene>
+        <!--Activity-->
+        <scene sceneID="W0n-mc-aah">
+            <objects>
+                <tableViewController title="Activity" id="Ghd-J3-NAb" customClass="UserHistoryTableViewController" customModule="smartLock" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HqD-L6-2PB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Ghd-J3-NAb" id="uWz-Cg-HD3"/>
+                            <outlet property="delegate" destination="Ghd-J3-NAb" id="R4p-ij-cbt"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Activity" id="ZPi-93-Ooh"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P3h-mR-hgz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3230" y="1555"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DWp-ku-hix"/>
+        <segue reference="7OI-D7-xGW"/>
         <segue reference="22f-Oc-Ekp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

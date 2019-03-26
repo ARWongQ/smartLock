@@ -22,6 +22,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.1)
   - SwiftyJSON (4.2.0)
   - TextFieldEffects (1.5.1)
+  - TimelineTableViewCell (1.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - SwiftyJSON
   - TextFieldEffects
+  - TimelineTableViewCell
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - SwiftyJSON
     - TextFieldEffects
+    - TimelineTableViewCell
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
@@ -57,7 +60,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   TextFieldEffects: 7d372f58aeaf9acd9626bbf962680aef926b085d
+  TimelineTableViewCell: 71a4bc787bfeb5a85083171d18b113a5f5db2be8
 
-PODFILE CHECKSUM: 294d6d06cd4f43a71cac10598e00abf45b283cae
+PODFILE CHECKSUM: 3ce2770357cec72faf11c9913ca9910a0af08c4e
 
 COCOAPODS: 1.6.0

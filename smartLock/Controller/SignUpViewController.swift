@@ -54,6 +54,9 @@ class SignUpViewController: UIViewController {
                 if let err = error {
                     print("cannot create user ", err)
                 } else {
+                    Auth.auth().currentUser?.sendEmailVerification { (error) in
+                        print("error sending verification email ", error)
+                    }
                     print("user PROBABLY created")
                     /* Since we created the user in Firebase, we need to add the user's info in the
                        actual Azure DB. Note that we do this even though the user hasn't verified

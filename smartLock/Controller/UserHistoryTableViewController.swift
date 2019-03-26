@@ -1,22 +1,23 @@
 //
-//  UserHistoryViewController.swift
+//  TimelineTableViewController.swift
 //  smartLock
 //
-//  Created by Augusto Wong  on 1/15/19.
+//  Created by Mario Zyla on 3/26/19.
 //  Copyright © 2019 WPI. All rights reserved.
 //
-
 import UIKit
 import TimelineTableViewCell
 
-class UserHistoryViewController: UITableViewController {
+class UserHistoryTableViewController: UITableViewController {
+    
+    
     
     
     // TimelinePoint, Timeline back color, title, description, lineInfo, thumbnail, illustration
     let data:[Int: [(TimelinePoint, UIColor, String, String, String?, String?, String?)]] = [0:[
-        (TimelinePoint(), UIColor.black, "12:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", nil, nil, "Sun"),
-        (TimelinePoint(), UIColor.black, "15:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", nil, nil, "Sun"),
-        (TimelinePoint(color: UIColor.green, filled: true), UIColor.green, "16:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "150 mins", "Apple", "Sun"),
+        (TimelinePoint(), UIColor.black, "12:30", "Mario unlocked the door.", nil, nil, "Sun"),
+        (TimelinePoint(), UIColor.black, "15:30", "You let a friend in.", nil, nil, "Sun"),
+        (TimelinePoint(color: UIColor.green, filled: true), UIColor.green, "16:30", "Augusto unlocked the door", "150 mins", "Apple", "Sun"),
         (TimelinePoint(), UIColor.clear, "19:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", nil, nil, "Moon")
         ], 1:[
             (TimelinePoint(), UIColor.lightGray, "08:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "60 mins", nil, "Sun"),
@@ -35,13 +36,21 @@ class UserHistoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Sets the title large and white
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [ NSAttributedString.Key.foregroundColor: UIColor.white ]
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let timelineTableViewCellNib = UINib(nibName: "TimelineTableViewCell", bundle: Bundle(for: TimelineTableViewCell.self))
         self.tableView.register(timelineTableViewCellNib, forCellReuseIdentifier: "TimelineTableViewCell")
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,6 +59,7 @@ class UserHistoryViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return data.count
@@ -64,6 +74,11 @@ class UserHistoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (section == 0) {
+            return "Today"
+        } else if (section == 1) {
+            return "Yesterday"
+        }
         return "Day " + String(describing: section + 1)
     }
     
@@ -109,4 +124,51 @@ class UserHistoryViewController: UITableViewController {
         
         print(sectionData[indexPath.row])
     }
+    
+    /*
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
+    /*
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
+    /*
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
+    /*
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+

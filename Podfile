@@ -12,5 +12,6 @@ target 'smartLock' do
   pod 'AlamofireImage'
   pod 'AZSClient'
   pod 'Firebase/Auth'
+  pod 'TimelineTableViewCell'
 
 end

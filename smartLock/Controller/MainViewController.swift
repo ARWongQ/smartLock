@@ -154,6 +154,10 @@ class MainViewController: UIViewController {
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { [weak self] user, error in
                 if let strongSelf = self {
                     print("SIGN IN: ", strongSelf)
+                    if (Auth.auth().currentUser!.isEmailVerified == false) {
+                        print("Please verify email")
+                        return
+                    }
                 } else {
                     print("SIGN IN: Could not sign user ", error)
                     return
@@ -170,7 +174,6 @@ class MainViewController: UIViewController {
         
         let appUserTable = azureClient.table(withName: "App_User")
         // Create a predicate that finds users with the given user name and password
-//        var predicate =  NSPredicate(format: "email = %@ AND userPassword = %@", emailTextField.text!, passwordTextField.text!)
         appUserTable.read(with : predicate) { (result, error) in
             if let err = error {
                 print("ERROR ", err)
@@ -198,27 +201,39 @@ class MainViewController: UIViewController {
                                 // need to get info for all these adminIds
                                 print("admin ids", adminIds)
                                 var admins : [[AnyHashable : Any]] = []
-                                for adminId in adminIds {
-                                    print("adminid", adminId)
-                                    predicate = NSPredicate(format: "id = %d", (adminId["addedUserId"] as! NSString).intValue)
-                                    appUserTable.read(with : predicate) { (result, error) in
-                                        if let err = error {
-                                            print("Error getting admins ", err)
-                                        } else if var theseAdmins = result?.items {
-                                            let thisAdmin = theseAdmins[0]
-                                            print("thisAdmin", thisAdmin)
-                                            admins.append(thisAdmin)
-                                            if (admins.count == adminIds.count) {
-                                                print("RIGHT BEFORE CREATING USER")
-                                                print("friends", friends)
-                                                print("admins", admins)
-                                                // create the user with friends and admins
-                                                self.user = self.createUser(user: users[0], friends: friends, admins: admins)
-                                                // move to the next screen
-                                                self.performSegue(withIdentifier: "mainToUserMain", sender: self)
+                                if (adminIds.count != 0) {
+      
+                                    for adminId in adminIds {
+                                        print("adminid", adminId)
+                                        predicate = NSPredicate(format: "id = %d", (adminId["addedUserId"] as! NSString).intValue)
+                                        appUserTable.read(with : predicate) { (result, error) in
+                                            if let err = error {
+                                                print("Error getting admins ", err)
+                                            } else if var theseAdmins = result?.items {
+                                                let thisAdmin = theseAdmins[0]
+                                                print("thisAdmin", thisAdmin)
+                                                admins.append(thisAdmin)
+                                                print("admins count", admins.count, "adminsids count", adminIds.count)
+                                                if (admins.count == adminIds.count) {
+                                                    print("RIGHT BEFORE CREATING USER")
+                                                    print("friends", friends)
+                                                    print("admins", admins)
+                                                    // create the user with friends and admins
+                                                    self.user = self.createUser(user: users[0], friends: friends, admins: admins)
+                                                    // move to the next screen
+                                                    self.performSegue(withIdentifier: "mainToUserMain", sender: self)
+                                                }
                                             }
                                         }
                                     }
+                                }
+                                    print("RIGHT BEFORE CREATING USER")
+                                    print("friends", friends)
+                                    print("admins", admins)
+                                    // create the user with friends and admins
+                                    self.user = self.createUser(user: users[0], friends: friends, admins: admins)
+                                    // move to the next screen
+                                    self.performSegue(withIdentifier: "mainToUserMain", sender: self)
                                 }
                             }
                         }
@@ -226,7 +241,6 @@ class MainViewController: UIViewController {
                 }
             }
         }
-    }
         /******************************************************************************************************************/
     
     

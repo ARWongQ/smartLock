@@ -37,6 +37,14 @@
 		2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D923222578FD00238496 /* SafariServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2FD2D9272225BEEE00238496 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */; };
 		2FD2D92A2225CAA100238496 /* ClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD2D9292225CAA100238496 /* ClientManager.swift */; };
+		2FED3D52224A75C90039B735 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FED3D51224A75C90039B735 /* AVKit.framework */; };
+		2FED3D54224A7E550039B735 /* UserHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED3D53224A7E550039B735 /* UserHistoryTableViewController.swift */; };
+		2FED3D74224A8B320039B735 /* TimelineTableViewCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FED3D73224A8B320039B735 /* TimelineTableViewCell.framework */; };
+		2FED3D7C224A8D910039B735 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED3D76224A8D910039B735 /* TimelineTableViewCell.swift */; };
+		2FED3D7D224A8D910039B735 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED3D77224A8D910039B735 /* Timeline.swift */; };
+		2FED3D7E224A8D910039B735 /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED3D79224A8D910039B735 /* TimelinePoint.swift */; };
+		2FED3D7F224A8D910039B735 /* TimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FED3D7A224A8D910039B735 /* TimelineTableViewCell.xib */; };
+		2FED3D80224A8D910039B735 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FED3D7B224A8D910039B735 /* Info.plist */; };
 		57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894EEC3048304F116E81FF53 /* Pods_smartLock.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +88,15 @@
 		2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
 		2FD2D9282225C04700238496 /* HubInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
 		2FD2D9292225CAA100238496 /* ClientManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientManager.swift; sourceTree = "<group>"; };
+		2FED3D51224A75C90039B735 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		2FED3D53224A7E550039B735 /* UserHistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHistoryTableViewController.swift; sourceTree = "<group>"; };
+		2FED3D73224A8B320039B735 /* TimelineTableViewCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TimelineTableViewCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FED3D76224A8D910039B735 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
+		2FED3D77224A8D910039B735 /* Timeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
+		2FED3D78224A8D910039B735 /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
+		2FED3D79224A8D910039B735 /* TimelinePoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinePoint.swift; sourceTree = "<group>"; };
+		2FED3D7A224A8D910039B735 /* TimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineTableViewCell.xib; sourceTree = "<group>"; };
+		2FED3D7B224A8D910039B735 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4061528562EA75D222AA1A36 /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
 		41662F4F922E6C02D2033AEC /* Pods-smartLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smartLock.debug.xcconfig"; path = "Target Support Files/Pods-smartLock/Pods-smartLock.debug.xcconfig"; sourceTree = "<group>"; };
 		894EEC3048304F116E81FF53 /* Pods_smartLock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smartLock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FED3D74224A8B320039B735 /* TimelineTableViewCell.framework in Frameworks */,
+				2FED3D52224A75C90039B735 /* AVKit.framework in Frameworks */,
 				2FAFF2D7223FF2640092F3DB /* MicrosoftAzureMobile.framework in Frameworks */,
 				2FD2D924222578FD00238496 /* SafariServices.framework in Frameworks */,
 				2FD2D922222578BC00238496 /* WebKit.framework in Frameworks */,
@@ -114,6 +133,7 @@
 		133B56A221ADE87F00DCF0F9 = {
 			isa = PBXGroup;
 			children = (
+				2FED3D75224A8D910039B735 /* TimelineTableViewCell */,
 				2FD2D9292225CAA100238496 /* ClientManager.swift */,
 				2FD2D9282225C04700238496 /* HubInfo.h */,
 				2FD2D9262225BEED00238496 /* WindowsAzureMessaging.framework */,
@@ -180,6 +200,7 @@
 				1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */,
 				1323647921F697600027E2C7 /* UserAccountEditingViewController.swift */,
 				132E416E21EEE832007CB660 /* UserHistoryViewController.swift */,
+				2FED3D53224A7E550039B735 /* UserHistoryTableViewController.swift */,
 				132E416D21EEE832007CB660 /* UserSettingsViewController.swift */,
 				133C73E221B7330800B65C95 /* UserMainViewController.swift */,
 				133B56AE21ADE87F00DCF0F9 /* AppDelegate.swift */,
@@ -198,6 +219,19 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		2FED3D75224A8D910039B735 /* TimelineTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2FED3D76224A8D910039B735 /* TimelineTableViewCell.swift */,
+				2FED3D77224A8D910039B735 /* Timeline.swift */,
+				2FED3D78224A8D910039B735 /* TimelineTableViewCell.h */,
+				2FED3D79224A8D910039B735 /* TimelinePoint.swift */,
+				2FED3D7A224A8D910039B735 /* TimelineTableViewCell.xib */,
+				2FED3D7B224A8D910039B735 /* Info.plist */,
+			);
+			path = TimelineTableViewCell;
+			sourceTree = "<group>";
+		};
 		3B329BEBEC83F8ACEC2492A9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +246,8 @@
 		D4DCBF4CF91DCB05F3D543C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FED3D73224A8B320039B735 /* TimelineTableViewCell.framework */,
+				2FED3D51224A75C90039B735 /* AVKit.framework */,
 				2FAFF2D5223FF2500092F3DB /* AZSClient.framework */,
 				2FD2D923222578FD00238496 /* SafariServices.framework */,
 				2FD2D921222578BC00238496 /* WebKit.framework */,
@@ -286,9 +322,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FED3D80224A8D910039B735 /* Info.plist in Resources */,
 				132DF75E2206420D00AA10CC /* RolandoProfile.jpg in Resources */,
 				1355266222015C8700B49139 /* testImage.png in Resources */,
 				133B56B921ADE88000DCF0F9 /* LaunchScreen.storyboard in Resources */,
+				2FED3D7F224A8D910039B735 /* TimelineTableViewCell.xib in Resources */,
 				133B56B621ADE88000DCF0F9 /* Assets.xcassets in Resources */,
 				133B56B421ADE87F00DCF0F9 /* Main.storyboard in Resources */,
 				2FAFF2D922404F8F0092F3DB /* GoogleService-Info.plist in Resources */,
@@ -336,6 +374,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
+				"${BUILT_PRODUCTS_DIR}/TimelineTableViewCell/TimelineTableViewCell.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -348,6 +387,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TimelineTableViewCell.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -361,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FED3D7D224A8D910039B735 /* Timeline.swift in Sources */,
 				1323647821F6935D0027E2C7 /* UserAccountTableViewController.swift in Sources */,
 				1355265E220122A900B49139 /* Friend.swift in Sources */,
 				132DF7602206570E00AA10CC /* Device.swift in Sources */,
@@ -369,6 +410,9 @@
 				132FE97D22405EED000BD966 /* addAdminViewController.swift in Sources */,
 				1346CD372235EFC400134FB8 /* AdminInfo.swift in Sources */,
 				1355265C2201220E00B49139 /* UserFriendsTableViewController.swift in Sources */,
+				2FED3D7E224A8D910039B735 /* TimelinePoint.swift in Sources */,
+				2FED3D7C224A8D910039B735 /* TimelineTableViewCell.swift in Sources */,
+				2FED3D54224A7E550039B735 /* UserHistoryTableViewController.swift in Sources */,
 				133C73E321B7330800B65C95 /* UserMainViewController.swift in Sources */,
 				132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */,
 				1323647221F687420027E2C7 /* AccountTableViewCell.swift in Sources */,
