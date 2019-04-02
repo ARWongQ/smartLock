@@ -255,6 +255,7 @@ class MainViewController: UIViewController {
         let email = user["email"] as! String
         let password = user["userPassword"] as! String
         var myUser = User( Int(id), firstN, lastN, email,  password )
+        setImageFromDB(myUser)
 
         for friend in friends{
             print(friend)
@@ -332,6 +333,26 @@ class MainViewController: UIViewController {
                 
             }
         }
+    }
+    
+    // get the image from the vm for a requested user
+    func setImageFromDB( _ user: User) {
+        print("Getting picture ", user.imageName)
+        let parameters: Parameters = ["friendImageName": user.imageName ]
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/getFriendImage"
+        Alamofire.request(url, method: .get, parameters: parameters).responseImage { response in
+            if response.result.isSuccess {
+                // show the image from the DB
+                print("SETTING IMAGE OF ADMIN")
+                user.profileImg = response.result.value!
+            }else{
+                // set temp image
+                print("No image received for this admin")
+                user.profileImg = UIImage(named: "img_placeholder")!
+                
+            }
+        }
+        
     }
 }
 

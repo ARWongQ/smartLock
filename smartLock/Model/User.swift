@@ -17,6 +17,7 @@ class User {
     var fullName: String
     var email: String
     var password: String
+    var imageName: String
     var admins: [AdminInfo]
     var friends: [Friend]
     var devices: [Device]
@@ -29,6 +30,7 @@ class User {
         fullName = "\(_firstName) \(_lastName)"
         email = _email
         password = _password
+        imageName = "\(_firstName)_\(_lastName).jpeg"
         admins = []
         friends = []
         devices = []

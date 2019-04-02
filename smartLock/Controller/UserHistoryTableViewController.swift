@@ -11,30 +11,37 @@ import TimelineTableViewCell
 class UserHistoryTableViewController: UITableViewController {
     
     
+    let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
+
+    
     
     
     // TimelinePoint, Timeline back color, title, description, lineInfo, thumbnail, illustration
-    let data:[Int: [(TimelinePoint, UIColor, String, String, String?, String?, String?)]] = [0:[
-        (TimelinePoint(), UIColor.black, "12:30", "Mario unlocked the door.", nil, nil, "Sun"),
-        (TimelinePoint(), UIColor.black, "15:30", "You let a friend in.", nil, nil, "Sun"),
-        (TimelinePoint(color: UIColor.green, filled: true), UIColor.green, "16:30", "Augusto unlocked the door", "150 mins", "Apple", "Sun"),
-        (TimelinePoint(), UIColor.clear, "19:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", nil, nil, "Moon")
-        ], 1:[
-            (TimelinePoint(), UIColor.lightGray, "08:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "60 mins", nil, "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "09:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "30 mins", nil, "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "10:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "90 mins", nil, "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "11:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "60 mins", nil, "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "12:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "30 mins", "Apple", "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "13:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "120 mins", "Apple", "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "15:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "150 mins", "Apple", "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "17:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "60 mins", nil, "Sun"),
-            (TimelinePoint(), UIColor.lightGray, "18:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "60 mins", nil, "Moon"),
-            (TimelinePoint(), UIColor.lightGray, "19:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "30 mins", nil, "Moon"),
-            (TimelinePoint(), backColor: UIColor.clear, "20:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", nil, nil, "Moon")
-        ]]
+//    let data:[Int: [(TimelinePoint, UIColor, String, String, String?, String?, String?)]] = [0:[
+//        (TimelinePoint(), UIColor.black, "12:30", "Mario unlocked the door.", nil, nil, "Sun"),
+//        (TimelinePoint(), UIColor.black, "15:30", "You let a friend in.", nil, nil, "Sun"),
+//        (TimelinePoint(color: UIColor.green, filled: true), UIColor.green, "16:30", "Augusto unlocked the door", "150 mins", "Apple", "Sun"),
+//        (TimelinePoint(), UIColor.clear, "19:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", nil, nil, "Moon")
+//        ], 1:[
+//            (TimelinePoint(), UIColor.lightGray, "08:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "60 mins", nil, "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "09:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "30 mins", nil, "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "10:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "90 mins", nil, "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "11:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "60 mins", nil, "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "12:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "30 mins", "Apple", "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "13:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "120 mins", "Apple", "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "15:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", "150 mins", "Apple", "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "17:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "60 mins", nil, "Sun"),
+//            (TimelinePoint(), UIColor.lightGray, "18:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "60 mins", nil, "Moon"),
+//            (TimelinePoint(), UIColor.lightGray, "19:30", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", "30 mins", nil, "Moon"),
+//            (TimelinePoint(), backColor: UIColor.clear, "20:00", "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", nil, nil, "Moon")
+//        ]]
+    
+    var data: [Int: [(TimelinePoint, UIColor, String, String, String?, String?, String?)]] = [0: [(TimelinePoint(), UIColor.black, "10:54", "Mario opened the door", nil, nil, "Sun")]]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Sets the title large and white
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -50,6 +57,67 @@ class UserHistoryTableViewController: UITableViewController {
         
         let timelineTableViewCellNib = UINib(nibName: "TimelineTableViewCell", bundle: Bundle(for: TimelineTableViewCell.self))
         self.tableView.register(timelineTableViewCellNib, forCellReuseIdentifier: "TimelineTableViewCell")
+
+        
+        /* Azure Client for SQL DB access */
+        let azureClient = myAppDelegate.client
+        
+        
+//        var activities:[Int: [(TimelinePoint, UIColor, String, String, String?, String?, String?)]] = [:]
+//        [0:[
+//            (TimelinePoint(), UIColor.black, "12:30", "Mario unlocked the door.", nil, nil, "Sun")
+        let activityTable = azureClient.table(withName: "Activity")
+        
+        activityTable.read() { (result, error) in
+            if let err = error {
+                print("Error reading activityTable ", err)
+            } else if let DBactivities = result?.items {
+                print("Result", result!.items)
+                print("DBactivities", DBactivities)
+                var dayCount = 0
+                
+                for thisActivity in DBactivities {
+                    print("thisActivity", thisActivity)
+                    var activity_dttm = thisActivity["activity_dttm"] as! String
+//                    let yearStartIndex = activity_dttm.startIndex
+//                    let yearEndIndex = String.Index(encodedOffset: 4)
+//                    var year = String(activity_dttm[yearStartIndex..<yearEndIndex])
+//                    print("year", year)
+//
+//                    let monthStartIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 5)
+//                    let monthEndIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 7)
+//                    var month = String(activity_dttm[monthStartIndex..<monthEndIndex])
+                    
+//                    let dayStartIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 6)
+//                    let dayEndIndex = activity_dttm.index(activity_dttm.endIndex, offsetBy: 8)
+//                    var day = Int(activity_dttm[dayStartIndex..<dayEndIndex])
+                    
+//                    let hourStartIndex = activity_dttm.index(activity_dttm.startIndex,offsetBy: 9)
+//                    let hourEndIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 11)
+//                    var hour = String(activity_dttm[hourStartIndex..<hourEndIndex])
+//                    print("hour", hour)
+//
+//                    let minutesStartIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 12)
+//                    let minutesEndIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 14)
+//                    var minutes = String(activity_dttm[minutesStartIndex..<minutesEndIndex])
+//                    print("minutes", minutes)
+                    
+                    let hoursAndMinutesStartIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 9)
+                    let hoursAndMinuesEndIndex = activity_dttm.index(activity_dttm.startIndex, offsetBy: 14)
+                    var hoursAndMinutes = String(activity_dttm[hoursAndMinutesStartIndex..<hoursAndMinuesEndIndex])
+                    print("hoursAndminutes", hoursAndMinutes)
+                    
+
+
+                }
+                
+                
+                print("Should have created the table")
+            }
+        }
+        
+
+        
 
     }
     
@@ -89,6 +157,8 @@ class UserHistoryTableViewController: UITableViewController {
         guard let sectionData = data[indexPath.section] else {
             return cell
         }
+        
+        print("sectionData", sectionData)
         
         let (timelinePoint, timelineBackColor, title, description, lineInfo, thumbnail, illustration) = sectionData[indexPath.row]
         var timelineFrontColor = UIColor.clear

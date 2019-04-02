@@ -12,6 +12,8 @@ import Alamofire
 
 class UserAccountTableViewController: UITableViewController, ChangeBasicInformationDelegate {
     
+    let myAppDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     ///////////////////////////////////////////////////////////////////////////////
     // MARK: - Delegate Functions
     // changes the name, email and password of the user
@@ -166,28 +168,28 @@ class UserAccountTableViewController: UITableViewController, ChangeBasicInformat
     // MARK: CLOUD/DB
     
     // updates a the user's info in the cloud's DB
+    // TODO Test
     func updateUserDB( _ user: User ) {
-        print("Updating User")
+        print("Updating currentUser info")
         
-        let parameters: Parameters = ["infoRequested": "postUpdateUser", "id": "" ]
-        let ipAddress = "23.96.59.16"
-        let url = "http://\(ipAddress):5000/sqlQuery"
+        let azureClient = myAppDelegate.client
+        let table = azureClient.table(withName: "App_User")
         
-        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print( response.result.isSuccess )
-            if response.result.isSuccess {
-                // Update the user
-                self.currentUser = user
-                
-                
-                
-            }else{
-                // SHOW ERROR MESSAGE, Failed to update the DB
-                
-                
-                
+        let newUserItem : [ String: Any] = [
+            "id" : user.id,
+            "firstName" : user.firstName,
+            "lastName" : user.lastName,
+            "userImage" : user.imageName
+        ]
+        
+        table.update(newUserItem) { (result, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else if let item = result {
+                print("In UserAccountTableViewController: Successfully updated friend", item)
             }
         }
+        
         
     }
 
@@ -218,8 +220,31 @@ extension UserAccountTableViewController: UIImagePickerControllerDelegate, UINav
 
         currentUser?.updateProfileImg( _profileImg: selectedImage )
         updateProfilePicture()
+        updateImageDB(selectedImage, (currentUser?.imageName)!)
 
     }
     
-
+    func updateImageDB( _ image: UIImage, _ imageName: String ) {
+        print("Updating USER Image in DB")
+        let rightImage = image.fixImageOrientation()
+        guard let data = rightImage!.jpegData(compressionQuality: 1) else { return }
+        let url = "http://doorlockvm.eastus.cloudapp.azure.com:5000/postFriendImage"
+        
+        Alamofire.upload( multipartFormData: { (form) in
+            form.append(data, withName: "file", fileName: imageName, mimeType:"image/jpeg")
+        }, to: url, encodingCompletion: { result in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseString { response in
+                    if( response.value == "No Face"){
+                        print("NO FACE IN THE UPLOADED IMAGE")
+                    }else if( response.value == "Success"){
+                        print("Image Successfully Encoded and added to the DB")
+                    }
+                }
+            case .failure( let encodingError):
+                print(encodingError)
+            }
+        })
+    }
 }

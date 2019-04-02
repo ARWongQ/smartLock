@@ -93,6 +93,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
+//        // testing adding an Activity
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        let client = delegate.client
+//        let activity = ["activity_dttm": "20190302 10:34:09 AM", "activity_desc":"Mario Opened Door"]
+//        
+//        let itemTable4 = client.table(withName: "Activity")
+//        itemTable4.insert(activity) {
+//            (insertedItem, error) in
+//            if (error != nil) {
+//                print("Error" + error.debugDescription)
+//            } else {
+//                print("Activity Inserted")
+//            }
+//        }
+        
 /**************************************** DO NOT REMOVE, we need it for testing *************************************************/
 
 

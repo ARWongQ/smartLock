@@ -13,7 +13,6 @@
 		132DF75E2206420D00AA10CC /* RolandoProfile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 132DF75D2206420D00AA10CC /* RolandoProfile.jpg */; };
 		132DF7602206570E00AA10CC /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132DF75F2206570E00AA10CC /* Device.swift */; };
 		132E417021EEE832007CB660 /* UserSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132E416D21EEE832007CB660 /* UserSettingsViewController.swift */; };
-		132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132E416E21EEE832007CB660 /* UserHistoryViewController.swift */; };
 		132E417321EEE85C007CB660 /* UserTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132E417221EEE85C007CB660 /* UserTabBarController.swift */; };
 		132FE97D22405EED000BD966 /* addAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FE97C22405EED000BD966 /* addAdminViewController.swift */; };
 		133B56AF21ADE87F00DCF0F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133B56AE21ADE87F00DCF0F9 /* AppDelegate.swift */; };
@@ -44,7 +43,6 @@
 		2FED3D7D224A8D910039B735 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED3D77224A8D910039B735 /* Timeline.swift */; };
 		2FED3D7E224A8D910039B735 /* TimelinePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FED3D79224A8D910039B735 /* TimelinePoint.swift */; };
 		2FED3D7F224A8D910039B735 /* TimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FED3D7A224A8D910039B735 /* TimelineTableViewCell.xib */; };
-		2FED3D80224A8D910039B735 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FED3D7B224A8D910039B735 /* Info.plist */; };
 		57CD70C13BFEB2A90B60A9EE /* Pods_smartLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894EEC3048304F116E81FF53 /* Pods_smartLock.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +53,6 @@
 		132DF75D2206420D00AA10CC /* RolandoProfile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RolandoProfile.jpg; sourceTree = "<group>"; };
 		132DF75F2206570E00AA10CC /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		132E416D21EEE832007CB660 /* UserSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsViewController.swift; sourceTree = "<group>"; };
-		132E416E21EEE832007CB660 /* UserHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserHistoryViewController.swift; sourceTree = "<group>"; };
 		132E417221EEE85C007CB660 /* UserTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTabBarController.swift; sourceTree = "<group>"; };
 		132FE97C22405EED000BD966 /* addAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAdminViewController.swift; sourceTree = "<group>"; };
 		133B56AB21ADE87F00DCF0F9 /* smartLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +196,6 @@
 				13552663220166CA00B49139 /* FriendInfoViewController.swift */,
 				1355265B2201220E00B49139 /* UserFriendsTableViewController.swift */,
 				1323647921F697600027E2C7 /* UserAccountEditingViewController.swift */,
-				132E416E21EEE832007CB660 /* UserHistoryViewController.swift */,
 				2FED3D53224A7E550039B735 /* UserHistoryTableViewController.swift */,
 				132E416D21EEE832007CB660 /* UserSettingsViewController.swift */,
 				133C73E221B7330800B65C95 /* UserMainViewController.swift */,
@@ -322,7 +318,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FED3D80224A8D910039B735 /* Info.plist in Resources */,
 				132DF75E2206420D00AA10CC /* RolandoProfile.jpg in Resources */,
 				1355266222015C8700B49139 /* testImage.png in Resources */,
 				133B56B921ADE88000DCF0F9 /* LaunchScreen.storyboard in Resources */,
@@ -414,7 +409,6 @@
 				2FED3D7C224A8D910039B735 /* TimelineTableViewCell.swift in Sources */,
 				2FED3D54224A7E550039B735 /* UserHistoryTableViewController.swift in Sources */,
 				133C73E321B7330800B65C95 /* UserMainViewController.swift in Sources */,
-				132E417121EEE832007CB660 /* UserHistoryViewController.swift in Sources */,
 				1323647221F687420027E2C7 /* AccountTableViewCell.swift in Sources */,
 				2FD2D92A2225CAA100238496 /* ClientManager.swift in Sources */,
 				132E417021EEE832007CB660 /* UserSettingsViewController.swift in Sources */,
